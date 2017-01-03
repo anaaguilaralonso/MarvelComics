@@ -16,4 +16,9 @@ public class MainPresenter implements Presenter {
         this.mainView = mainView;
     }
 
+
+    @Override
+    public void start() {
+
+    }
 }
