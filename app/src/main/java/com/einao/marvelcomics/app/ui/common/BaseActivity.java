@@ -1,4 +1,4 @@
-package einao.com.marvelcomics.ui.common;
+package com.einao.marvelcomics.app.ui.common;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

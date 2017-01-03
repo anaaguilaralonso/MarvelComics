@@ -1,7 +1,8 @@
-package einao.com.marvelcomics.ui.presenter;
+package com.einao.marvelcomics.app.ui.comiclist.presenter;
 
-import einao.com.marvelcomics.ui.common.Presenter;
-import einao.com.marvelcomics.ui.view.MainView;
+
+import com.einao.marvelcomics.app.ui.comiclist.view.MainView;
+import com.einao.marvelcomics.app.ui.common.Presenter;
 
 /**
  * Created by akiana on 3/1/17.

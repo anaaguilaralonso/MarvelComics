@@ -1,11 +1,10 @@
-package einao.com.marvelcomics.ui.view;
+package com.einao.marvelcomics.app.ui.comiclist.view;
 
 import android.os.Bundle;
 
-import einao.com.marvelcomics.R;
-import einao.com.marvelcomics.ui.common.BaseActivity;
-import einao.com.marvelcomics.ui.common.Presenter;
-import einao.com.marvelcomics.ui.presenter.MainPresenter;
+import com.einao.marvelcomics.R;
+import com.einao.marvelcomics.app.ui.comiclist.presenter.MainPresenter;
+import com.einao.marvelcomics.app.ui.common.BaseActivity;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainView {
 
