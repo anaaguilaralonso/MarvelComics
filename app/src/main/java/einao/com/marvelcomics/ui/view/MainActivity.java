@@ -7,9 +7,8 @@ import einao.com.marvelcomics.ui.common.BaseActivity;
 import einao.com.marvelcomics.ui.common.Presenter;
 import einao.com.marvelcomics.ui.presenter.MainPresenter;
 
-public class MainActivity extends BaseActivity implements MainView {
+public class MainActivity extends BaseActivity<MainPresenter> implements MainView {
 
-    MainPresenter mainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +17,8 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     @Override
-    public Presenter getPresenter() {
-        mainPresenter = new MainPresenter(this);
-        return mainPresenter;
+    public MainPresenter initPresenter() {
+        return new MainPresenter(this);
     }
-
 
 }

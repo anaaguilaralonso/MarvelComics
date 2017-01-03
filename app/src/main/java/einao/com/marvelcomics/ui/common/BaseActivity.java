@@ -8,18 +8,18 @@ import android.support.v7.app.AppCompatActivity;
  * Created by akiana on 3/1/17.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<T extends Presenter> extends AppCompatActivity {
 
-    private Presenter presenter;
+    private T presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (presenter != null){
-            getPresenter();
+            presenter = initPresenter();
         }
     }
 
-    public abstract Presenter getPresenter();
+    public abstract T initPresenter();
 }
