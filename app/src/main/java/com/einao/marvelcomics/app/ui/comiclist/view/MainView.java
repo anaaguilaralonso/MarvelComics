@@ -8,4 +8,5 @@ import com.einao.marvelcomics.app.ui.common.BaseView;
  */
 
 public interface MainView extends BaseView {
+    void addComic(String comicTitle);
 }
