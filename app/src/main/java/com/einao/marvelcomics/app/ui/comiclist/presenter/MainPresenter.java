@@ -3,8 +3,13 @@ package com.einao.marvelcomics.app.ui.comiclist.presenter;
 
 import com.einao.marvelcomics.app.ui.comiclist.view.MainView;
 import com.einao.marvelcomics.app.ui.common.Presenter;
+import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
+import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
+import com.einao.marvelcomics.app.ui.viewmodel.mappers.ComicsMapper;
+import com.einao.marvelcomics.domain.beans.Comic;
+import com.einao.marvelcomics.domain.beans.Comics;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Ana Aguilar.
@@ -21,22 +26,25 @@ public class MainPresenter implements Presenter {
 
     @Override
     public void start() {
-        ArrayList<String> comicList = getComicList();
-        showComicList(comicList);
+        Comics comicList = getComicList();
+        ComicsMapper comicsMapper = new ComicsMapper();
+        ComicsViewModel comicsViewModel = comicsMapper.map(comicList);
+        showComicList(comicsViewModel);
     }
 
-    private ArrayList<String> getComicList() {
-        ArrayList<String> fakeList = new ArrayList<String>();
-        fakeList.add("Title 1");
-        fakeList.add("Title 2");
-        fakeList.add("Title 3");
+    private Comics getComicList() {
+        Comics fakeList = new Comics();
+        fakeList.add(new Comic("Title 1"));
+        fakeList.add(new Comic("Title 2"));
+        fakeList.add(new Comic("Title 3"));
 
         return fakeList;
     }
 
-    private void showComicList(ArrayList<String> comicList){
-        for (int i = 0; i < comicList.size(); i++){
-            mainView.addComic(comicList.get(i));
+    private void showComicList(ComicsViewModel comicList) {
+        Iterator<ComicViewModel> iterator = comicList.iterator();
+        while (iterator.hasNext()) {
+            mainView.addComic(iterator.next());
         }
     }
 }

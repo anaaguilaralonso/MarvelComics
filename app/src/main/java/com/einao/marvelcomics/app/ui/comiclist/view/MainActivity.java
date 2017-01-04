@@ -8,8 +8,8 @@ import com.einao.marvelcomics.R;
 import com.einao.marvelcomics.app.ui.comiclist.adapter.ComicListAdapter;
 import com.einao.marvelcomics.app.ui.comiclist.presenter.MainPresenter;
 import com.einao.marvelcomics.app.ui.common.BaseActivity;
-
-import java.util.ArrayList;
+import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
+import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
 
 import butterknife.BindView;
 
@@ -19,7 +19,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     @BindView(R.id.comics_list)
     RecyclerView comicRecyclerView;
 
-    private ArrayList<String> comicList;
+    private ComicsViewModel comicList;
     private RecyclerView.Adapter comicListAdapter;
 
 
@@ -30,7 +30,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         comicRecyclerView.setLayoutManager(layoutManager);
 
-        comicList = new ArrayList<String>();
+        comicList = new ComicsViewModel();
         comicListAdapter = new ComicListAdapter(comicList);
         comicRecyclerView.setAdapter(comicListAdapter);
 
@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     }
 
     @Override
-    public void addComic(String comicTitle) {
-        comicList.add(comicTitle);
+    public void addComic(ComicViewModel comic) {
+        comicList.add(comic);
     }
 }

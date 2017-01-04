@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 
 import com.einao.marvelcomics.R;
+import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
+import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
 
 import java.util.List;
 
@@ -16,10 +18,10 @@ import java.util.List;
 
 public class ComicListAdapter extends RecyclerView.Adapter<ComicViewHolder> {
 
-    List<String> comicList;
+    ComicsViewModel comicsViewModel;
 
-    public ComicListAdapter(List<String> comicList){
-        this.comicList = comicList;
+    public ComicListAdapter(ComicsViewModel comicsViewModel){
+        this.comicsViewModel = comicsViewModel;
     }
 
     @Override
@@ -34,12 +36,13 @@ public class ComicListAdapter extends RecyclerView.Adapter<ComicViewHolder> {
 
     @Override
     public int getItemCount() {
-        return comicList.size();
+        return comicsViewModel.getCount();
     }
 
     @Override
     public void onBindViewHolder(ComicViewHolder holder, int position) {
-        holder.title.setText(comicList.get(position));
+        ComicViewModel comicViewModel = comicsViewModel.getItem(position);
+        holder.title.setText(comicViewModel.getTitle());
     }
 
 }
