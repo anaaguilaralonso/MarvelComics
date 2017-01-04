@@ -9,7 +9,7 @@ import com.einao.marvelcomics.domain.beans.Comic;
 
 public class ComicMapper {
 
-    public static ComicViewModel map(Comic comic) {
+    public ComicViewModel map(Comic comic) {
         ComicViewModel comicViewModel = new ComicViewModel();
         comicViewModel.setTitle(comic.getTitle());
         return comicViewModel;

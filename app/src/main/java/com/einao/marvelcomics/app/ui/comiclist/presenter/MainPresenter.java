@@ -17,12 +17,11 @@ import java.util.Iterator;
 
 public class MainPresenter implements Presenter {
 
-    MainView mainView;
+    private MainView mainView;
 
     public MainPresenter(MainView mainView) {
         this.mainView = mainView;
     }
-
 
     @Override
     public void start() {
@@ -32,7 +31,7 @@ public class MainPresenter implements Presenter {
         showComicList(comicsViewModel);
     }
 
-    private Comics getComicList() {
+    protected Comics getComicList() {
         Comics fakeList = new Comics();
         fakeList.add(new Comic("Title 1"));
         fakeList.add(new Comic("Title 2"));

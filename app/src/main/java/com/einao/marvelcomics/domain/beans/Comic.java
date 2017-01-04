@@ -12,6 +12,9 @@ public class Comic {
         this.title = title;
     }
 
+    public Comic() {
+    }
+
     public String getTitle() {
         return title;
     }
