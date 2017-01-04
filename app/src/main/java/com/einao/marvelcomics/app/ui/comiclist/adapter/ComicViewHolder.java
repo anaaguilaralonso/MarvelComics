@@ -10,7 +10,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by akiana on 4/1/17.
+ * Created by Ana Aguilar.
  */
 
 public class ComicViewHolder extends RecyclerView.ViewHolder{

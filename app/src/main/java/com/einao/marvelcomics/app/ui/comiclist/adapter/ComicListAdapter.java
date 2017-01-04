@@ -11,7 +11,7 @@ import com.einao.marvelcomics.R;
 import java.util.List;
 
 /**
- * Created by akiana on 4/1/17.
+ * Created by Ana Aguilar.
  */
 
 public class ComicListAdapter extends RecyclerView.Adapter<ComicViewHolder> {

@@ -5,7 +5,7 @@ import com.einao.marvelcomics.domain.beans.Comic;
 import java.util.List;
 
 /**
- * Created by akiana on 3/1/17.
+ * Created by Ana Aguilar.
  */
 
 public class ComicListUseCase extends UseCase<List<Comic>, Void> {

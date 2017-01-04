@@ -1,7 +1,7 @@
 package com.einao.marvelcomics.domain.beans;
 
 /**
- * Created by akiana on 3/1/17.
+ * Created by Ana Aguilar.
  */
 
 public class Comic {

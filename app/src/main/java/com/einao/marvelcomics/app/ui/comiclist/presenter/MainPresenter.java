@@ -7,7 +7,7 @@ import com.einao.marvelcomics.app.ui.common.Presenter;
 import java.util.ArrayList;
 
 /**
- * Created by akiana on 3/1/17.
+ * Created by Ana Aguilar.
  */
 
 public class MainPresenter implements Presenter {

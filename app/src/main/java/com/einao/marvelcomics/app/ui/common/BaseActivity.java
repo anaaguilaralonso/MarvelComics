@@ -9,7 +9,7 @@ import com.einao.marvelcomics.R;
 import butterknife.ButterKnife;
 
 /**
- * Created by akiana on 3/1/17.
+ * Created by Ana Aguilar.
  */
 
 public abstract class BaseActivity<T extends Presenter> extends AppCompatActivity {
