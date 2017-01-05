@@ -2,8 +2,7 @@ package com.einao.marvelcomics.app.ui.comiclist.presenter;
 
 import com.einao.marvelcomics.app.ui.comiclist.view.MainView;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
-import com.einao.marvelcomics.domain.beans.Comic;
-import com.einao.marvelcomics.domain.beans.Comics;
+import com.einao.marvelcomics.domain.usecases.ComicsUseCase;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,10 +20,13 @@ public class MainPresenterTest {
     @Mock
     private MainView mainView;
 
+    @Mock
+    private ComicsUseCase comicsUseCase;
+
     private MainPresenter mainPresenter;
 
     @Before
-    public void init(){
+    public void init() {
         mainPresenter = new MainPresenter(mainView);
     }
 

@@ -1,13 +1,17 @@
 package com.einao.marvelcomics.app.ui.comiclist.presenter;
 
 
+import android.util.Log;
+
+import com.einao.marvelcomics.app.threads.ThreadManagerImpl;
 import com.einao.marvelcomics.app.ui.comiclist.view.MainView;
 import com.einao.marvelcomics.app.ui.common.Presenter;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
 import com.einao.marvelcomics.app.ui.viewmodel.mappers.ComicsMapper;
-import com.einao.marvelcomics.domain.beans.Comic;
+import com.einao.marvelcomics.domain.INotification;
 import com.einao.marvelcomics.domain.beans.Comics;
+import com.einao.marvelcomics.domain.usecases.ComicsUseCase;
 
 import java.util.Iterator;
 
@@ -15,9 +19,11 @@ import java.util.Iterator;
  * Created by Ana Aguilar.
  */
 
-public class MainPresenter implements Presenter {
+public class MainPresenter implements Presenter, INotification<Comics> {
 
     private MainView mainView;
+
+    private ComicsUseCase comicsUseCase;
 
     public MainPresenter(MainView mainView) {
         this.mainView = mainView;
@@ -25,19 +31,14 @@ public class MainPresenter implements Presenter {
 
     @Override
     public void start() {
-        Comics comicList = getComicList();
-        ComicsMapper comicsMapper = new ComicsMapper();
-        ComicsViewModel comicsViewModel = comicsMapper.map(comicList);
-        showComicList(comicsViewModel);
+        getComicList();
     }
 
-    protected Comics getComicList() {
-        Comics fakeList = new Comics();
-        fakeList.add(new Comic("Title 1"));
-        fakeList.add(new Comic("Title 2"));
-        fakeList.add(new Comic("Title 3"));
+    protected void getComicList() {
 
-        return fakeList;
+        comicsUseCase = new ComicsUseCase(this);
+        comicsUseCase.execute();
+
     }
 
     private void showComicList(ComicsViewModel comicList) {
@@ -45,5 +46,17 @@ public class MainPresenter implements Presenter {
         while (iterator.hasNext()) {
             mainView.addComic(iterator.next());
         }
+    }
+
+    @Override
+    public void onSuccess(Comics response) {
+        ComicsMapper comicsMapper = new ComicsMapper();
+        ComicsViewModel comicsViewModel = comicsMapper.map(response);
+        showComicList(comicsViewModel);
+    }
+
+    @Override
+    public void onError(String error) {
+        Log.i(this.getClass().getName(), "Error");
     }
 }
