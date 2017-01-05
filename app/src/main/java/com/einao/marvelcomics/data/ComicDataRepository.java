@@ -3,9 +3,9 @@ package com.einao.marvelcomics.data;
 import com.einao.marvelcomics.data.network.ComicRestDataSource;
 import com.einao.marvelcomics.data.network.NetworkDataSourceCreator;
 import com.einao.marvelcomics.data.network.RetrofitCreator;
+import com.einao.marvelcomics.data.network.entities.ComicsEntity;
+import com.einao.marvelcomics.data.network.entities.mappers.ComicsEntityMapper;
 import com.einao.marvelcomics.domain.ComicRepository;
-import com.einao.marvelcomics.domain.INotification;
-import com.einao.marvelcomics.domain.beans.Comic;
 import com.einao.marvelcomics.domain.beans.Comics;
 
 /**
@@ -25,7 +25,9 @@ public class ComicDataRepository implements ComicRepository {
     @Override
     public Comics getComics() {
         dataSource = networkDataSourceCreator.factoryMethod();
-        return dataSource.getComics();
+        ComicsEntity comicsEntity = dataSource.getComics();
+        ComicsEntityMapper comicsMapper = new ComicsEntityMapper();
+        return comicsMapper.map(comicsEntity);
     }
 
 }

@@ -21,7 +21,6 @@ public class ComicsUseCase extends UseCase<Comics, Void> {
 
     @Override
     public void execute() {
-
         Comics comics = comicRepository.getComics();
         notification.onSuccess(comics);
     }
