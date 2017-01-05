@@ -3,7 +3,6 @@ package com.einao.marvelcomics.app.ui.comiclist.presenter;
 
 import android.util.Log;
 
-import com.einao.marvelcomics.app.threads.ThreadManagerImpl;
 import com.einao.marvelcomics.app.ui.comiclist.view.MainView;
 import com.einao.marvelcomics.app.ui.common.Presenter;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;

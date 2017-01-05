@@ -7,4 +7,5 @@ import com.einao.marvelcomics.data.DataSource;
  */
 
 public interface ComicRestDataSource extends DataSource {
+    void getComics();
 }
