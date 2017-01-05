@@ -2,7 +2,7 @@ package com.einao.marvelcomics.data;
 
 import com.einao.marvelcomics.data.network.ComicRestDataSource;
 import com.einao.marvelcomics.data.network.NetworkDataSourceCreator;
-import com.einao.marvelcomics.data.network.RetrofitCreator;
+import com.einao.marvelcomics.data.network.retrofit.RetrofitCreator;
 import com.einao.marvelcomics.data.network.entities.ComicsEntity;
 import com.einao.marvelcomics.data.network.entities.mappers.ComicsEntityMapper;
 import com.einao.marvelcomics.domain.ComicRepository;

@@ -21,7 +21,13 @@ public class ComicsUseCase extends UseCase<Comics, Void> {
 
     @Override
     public void execute() {
-        Comics comics = comicRepository.getComics();
-        notification.onSuccess(comics);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Comics comics = comicRepository.getComics();
+                notification.onSuccess(comics);
+            }
+        });
+        thread.start();
     }
 }
