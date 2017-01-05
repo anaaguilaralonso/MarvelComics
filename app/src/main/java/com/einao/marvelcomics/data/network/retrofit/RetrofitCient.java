@@ -4,10 +4,10 @@ import android.util.Log;
 
 import com.einao.marvelcomics.app.common.ApiConstants;
 import com.einao.marvelcomics.data.network.ComicNetworkDataSource;
-import com.einao.marvelcomics.data.network.entities.ComicDataContainer;
-import com.einao.marvelcomics.data.network.entities.ComicDataWrapper;
-import com.einao.marvelcomics.data.network.entities.ComicEntity;
-import com.einao.marvelcomics.data.network.entities.NullComicEntitiesObject;
+import com.einao.marvelcomics.data.network.entities.NetworkResponse;
+import com.einao.marvelcomics.data.network.entities.marvelentities.ComicDataContainer;
+import com.einao.marvelcomics.data.network.entities.marvelentities.ComicDataWrapper;
+import com.einao.marvelcomics.data.network.entities.marvelentities.ComicEntity;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -33,28 +33,30 @@ public class RetrofitCient implements ComicNetworkDataSource {
     }
 
     @Override
-    public List<ComicEntity> getComics() {
+    public NetworkResponse<List<ComicEntity>> getComics() {
 
         RetrofitService retrofitService = retrofit.create(RetrofitService.class);
         Call<ResponseBody> responseBodyCall = retrofitService.listComics(ApiConstants.HTTP_REQUEST_TIMESTAMP, ApiConstants.HTTP_REQUEST_HASH, ApiConstants.HTTP_REQUEST_APIKEY, 5);
         try {
             Response<ResponseBody> response = responseBodyCall.execute();
             if (response.isSuccessful()) {
-                List<ComicEntity> comics = getComicsFromResponse(response);
-                return comics;
+                NetworkResponse<List<ComicEntity>> networkResponse = new NetworkResponse<List<ComicEntity>>();
+                networkResponse.setCode(response.code());
+                networkResponse.setResponse(getComicsFromResponse(response));
+                return networkResponse;
             } else {
-                return getNullObject(response.message());
+                return getErrorResponse(response.code(), response.message());
             }
         }catch (IOException exception){
-            return getNullObject("Error getting data");
+            return getErrorResponse(0, "Error getting data");
         }
-
     }
 
-    private NullComicEntitiesObject getNullObject(String error){
-        NullComicEntitiesObject nullComicEntityObject = new NullComicEntitiesObject();
-        nullComicEntityObject.setError(error);
-        return nullComicEntityObject;
+    private NetworkResponse<List<ComicEntity>> getErrorResponse(int code, String message) {
+        NetworkResponse<List<ComicEntity>> networkResponse = new NetworkResponse<List<ComicEntity>>();
+        networkResponse.setCode(code);
+        networkResponse.setError(message);
+        return networkResponse;
     }
 
     private List<ComicEntity> getComicsFromResponse(Response<ResponseBody> response) throws IOException {

@@ -4,7 +4,7 @@ import com.einao.marvelcomics.data.ComicDataRepository;
 import com.einao.marvelcomics.domain.ComicRepository;
 import com.einao.marvelcomics.domain.INotificator;
 import com.einao.marvelcomics.domain.beans.Comics;
-import com.einao.marvelcomics.domain.beans.NullComicsObject;
+import com.einao.marvelcomics.domain.beans.DataResponse;
 import com.einao.marvelcomics.domain.threads.ThreadManager;
 
 /**
@@ -28,13 +28,14 @@ public class ComicsUseCase extends UseCase<Comics, Void> {
             @Override
             public void run() {
 
-                final Comics comics = comicRepository.getComics();
+                final DataResponse<Comics> dataResponse = comicRepository.getComics();
                 threadManager.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (comics instanceof NullComicsObject) {
-                            notificator.onError(((NullComicsObject) comics).getError());
+                        if (dataResponse.hasError()){
+                            notificator.onError(dataResponse.getError());
                         } else {
+                            Comics comics = dataResponse.getData();
                             notificator.onSuccess(comics);
                         }
 
