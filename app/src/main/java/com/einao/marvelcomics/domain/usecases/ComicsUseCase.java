@@ -1,11 +1,10 @@
 package com.einao.marvelcomics.domain.usecases;
 
-import android.support.annotation.NonNull;
-
 import com.einao.marvelcomics.data.ComicDataRepository;
 import com.einao.marvelcomics.domain.ComicRepository;
-import com.einao.marvelcomics.domain.INotification;
+import com.einao.marvelcomics.domain.INotificator;
 import com.einao.marvelcomics.domain.beans.Comics;
+import com.einao.marvelcomics.domain.beans.NullComicsObject;
 import com.einao.marvelcomics.domain.threads.ThreadManager;
 
 /**
@@ -15,7 +14,7 @@ import com.einao.marvelcomics.domain.threads.ThreadManager;
 public class ComicsUseCase extends UseCase<Comics, Void> {
 
     private ComicRepository comicRepository;
-    private INotification<Comics> notification;
+    private INotificator<Comics> notificator;
     private ThreadManager threadManager;
 
     public ComicsUseCase(ThreadManager threadManager) {
@@ -28,11 +27,17 @@ public class ComicsUseCase extends UseCase<Comics, Void> {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
+
                 final Comics comics = comicRepository.getComics();
                 threadManager.post(new Runnable() {
                     @Override
                     public void run() {
-                        notification.onSuccess(comics);
+                        if (comics instanceof NullComicsObject) {
+                            notificator.onError(((NullComicsObject) comics).getError());
+                        } else {
+                            notificator.onSuccess(comics);
+                        }
+
                     }
                 });
             }
@@ -40,11 +45,7 @@ public class ComicsUseCase extends UseCase<Comics, Void> {
         thread.start();
     }
 
-    public INotification<Comics> getNotification() {
-        return notification;
-    }
-
-    public void registerNotificator(INotification<Comics> notification) {
-        this.notification = notification;
+    public void registerNotificator(INotificator<Comics> notification) {
+        this.notificator = notification;
     }
 }

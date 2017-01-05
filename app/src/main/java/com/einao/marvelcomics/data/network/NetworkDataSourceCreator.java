@@ -6,5 +6,5 @@ package com.einao.marvelcomics.data.network;
 
 public interface NetworkDataSourceCreator {
 
-    ComicRestDataSource factoryMethod();
+    ComicNetworkDataSource factoryMethod();
 }
