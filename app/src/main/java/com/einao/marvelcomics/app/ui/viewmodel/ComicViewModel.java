@@ -1,19 +1,12 @@
-package com.einao.marvelcomics.domain.beans;
+package com.einao.marvelcomics.app.ui.viewmodel;
 
 /**
  * Created by Ana Aguilar.
  */
 
-public class Comic {
+public class ComicViewModel {
 
     private String title;
-
-    public Comic(String title) {
-        this.title = title;
-    }
-
-    public Comic() {
-    }
 
     public String getTitle() {
         return title;
