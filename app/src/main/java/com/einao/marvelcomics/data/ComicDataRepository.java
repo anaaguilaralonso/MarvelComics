@@ -14,20 +14,18 @@ import com.einao.marvelcomics.domain.beans.Comics;
 
 public class ComicDataRepository implements ComicRepository {
 
-    INotification<Comics> notification;
 
     ComicRestDataSource dataSource;
     NetworkDataSourceCreator networkDataSourceCreator;
 
-    public ComicDataRepository(INotification<Comics> notification) {
-        this.notification = notification;
+    public ComicDataRepository() {
         networkDataSourceCreator = new RetrofitCreator();
     }
 
     @Override
-    public void getComics() {
-        dataSource = networkDataSourceCreator.factoryMethod(notification);
-        dataSource.getComics();
+    public Comics getComics() {
+        dataSource = networkDataSourceCreator.factoryMethod();
+        return dataSource.getComics();
     }
 
 }

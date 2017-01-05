@@ -10,19 +10,15 @@ import com.einao.marvelcomics.domain.beans.Comics;
 
 public class RetrofitCient implements ComicRestDataSource {
 
-    INotification notification;
-
-    public RetrofitCient(INotification notification){
-        this.notification = notification;
+    public RetrofitCient(){
     }
 
     @Override
-    public void getComics() {
+    public Comics getComics() {
         Comics fakeList = new Comics();
         fakeList.add(new Comic("Title 1"));
         fakeList.add(new Comic("Title 2"));
         fakeList.add(new Comic("Title 3"));
-
-        notification.onSuccess(fakeList);
+        return fakeList;
     }
 }

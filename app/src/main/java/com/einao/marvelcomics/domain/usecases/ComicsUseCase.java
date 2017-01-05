@@ -12,13 +12,17 @@ import com.einao.marvelcomics.domain.beans.Comics;
 public class ComicsUseCase extends UseCase<Comics, Void> {
 
     private ComicRepository comicRepository;
+    private INotification<Comics> notification;
 
     public ComicsUseCase(INotification notification) {
-        comicRepository = new ComicDataRepository(notification);
+        comicRepository = new ComicDataRepository();
+        this.notification = notification;
     }
 
     @Override
     public void execute() {
-        comicRepository.getComics();
+
+        Comics comics = comicRepository.getComics();
+        notification.onSuccess(comics);
     }
 }
