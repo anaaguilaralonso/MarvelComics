@@ -3,6 +3,7 @@ package com.einao.marvelcomics.app.ui.comiclist.presenter;
 
 import android.util.Log;
 
+import com.einao.marvelcomics.app.threads.ThreadManagerImpl;
 import com.einao.marvelcomics.app.ui.comiclist.view.MainView;
 import com.einao.marvelcomics.app.ui.common.Presenter;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
@@ -24,8 +25,9 @@ public class MainPresenter implements Presenter, INotification<Comics> {
 
     private ComicsUseCase comicsUseCase;
 
-    public MainPresenter(MainView mainView) {
+    public MainPresenter(MainView mainView, ComicsUseCase comicsUseCase) {
         this.mainView = mainView;
+        this.comicsUseCase = comicsUseCase;
     }
 
     @Override
@@ -34,8 +36,7 @@ public class MainPresenter implements Presenter, INotification<Comics> {
     }
 
     protected void getComicList() {
-
-        comicsUseCase = new ComicsUseCase(this);
+        comicsUseCase.registerNotificator(this);
         comicsUseCase.execute();
 
     }

@@ -21,7 +21,7 @@ public class ThreadManagerImpl implements ThreadManager {
 
     public static ThreadManager getInstance(){
         if (threadManager == null){
-            new ThreadManagerImpl();
+            threadManager = new ThreadManagerImpl();
         }
         return threadManager;
     }

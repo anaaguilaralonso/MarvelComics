@@ -24,6 +24,8 @@ public abstract class BaseActivity<T extends Presenter> extends AppCompatActivit
 
         ButterKnife.bind(this);
 
+        injectDependencies();
+
         if (presenter == null){
             presenter = initPresenter();
         }
@@ -32,4 +34,5 @@ public abstract class BaseActivity<T extends Presenter> extends AppCompatActivit
 
     public abstract int getLayout();
     public abstract T initPresenter();
+    public abstract void injectDependencies();
 }
