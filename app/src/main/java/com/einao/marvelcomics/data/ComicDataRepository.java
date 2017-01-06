@@ -12,14 +12,10 @@ import com.einao.marvelcomics.domain.beans.DataResponse;
 
 import java.util.List;
 
-/**
- * Created by Ana Aguilar.
- */
-
 public class ComicDataRepository implements ComicRepository {
 
-    ComicNetworkDataSource networkDataSource;
-    NetworkDataSourceCreator networkDataSourceCreator;
+    private final ComicNetworkDataSource networkDataSource;
+    private final NetworkDataSourceCreator networkDataSourceCreator;
 
     public ComicDataRepository() {
         networkDataSourceCreator = new RetrofitCreator();
@@ -29,8 +25,7 @@ public class ComicDataRepository implements ComicRepository {
     @Override
     public DataResponse<Comics> getComics() {
 
-        NetworkResponse<List<ComicEntity>> networkResponse = null;
-        networkResponse = networkDataSource.getComics();
+        NetworkResponse<List<ComicEntity>> networkResponse = networkDataSource.getComics();
 
         ComicsEntityMapper comicsMapper = new ComicsEntityMapper();
         DataResponse<Comics> dataComicResponse = comicsMapper.map(networkResponse);

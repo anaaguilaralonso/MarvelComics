@@ -1,9 +1,11 @@
 package com.einao.marvelcomics.data.network.retrofit;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.einao.marvelcomics.app.common.ApiConstants;
 import com.einao.marvelcomics.data.network.ComicNetworkDataSource;
+import com.einao.marvelcomics.data.network.entities.NetworkError;
 import com.einao.marvelcomics.data.network.entities.NetworkResponse;
 import com.einao.marvelcomics.data.network.entities.marvelentities.ComicDataContainer;
 import com.einao.marvelcomics.data.network.entities.marvelentities.ComicDataWrapper;
@@ -19,7 +21,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 /**
- * Created by Ana Aguilar.
+
  */
 
 public class RetrofitCient implements ComicNetworkDataSource {
@@ -41,7 +43,6 @@ public class RetrofitCient implements ComicNetworkDataSource {
             Response<ResponseBody> response = responseBodyCall.execute();
             if (response.isSuccessful()) {
                 NetworkResponse<List<ComicEntity>> networkResponse = new NetworkResponse<List<ComicEntity>>();
-                networkResponse.setCode(response.code());
                 networkResponse.setResponse(getComicsFromResponse(response));
                 return networkResponse;
             } else {
@@ -54,9 +55,17 @@ public class RetrofitCient implements ComicNetworkDataSource {
 
     private NetworkResponse<List<ComicEntity>> getErrorResponse(int code, String message) {
         NetworkResponse<List<ComicEntity>> networkResponse = new NetworkResponse<List<ComicEntity>>();
-        networkResponse.setCode(code);
-        networkResponse.setError(message);
+        NetworkError networkError = createNetworkError(code, message);
+        networkResponse.setError(networkError);
         return networkResponse;
+    }
+
+    @NonNull
+    private NetworkError createNetworkError(int code, String message) {
+        NetworkError networkError = new NetworkError();
+        networkError.setCode(code);
+        networkError.setMessage(message);
+        return networkError;
     }
 
     private List<ComicEntity> getComicsFromResponse(Response<ResponseBody> response) throws IOException {

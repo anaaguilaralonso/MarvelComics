@@ -3,6 +3,7 @@ package com.einao.marvelcomics.app.ui.comiclist.presenter;
 import com.einao.marvelcomics.app.ui.comiclist.view.MainView;
 import com.einao.marvelcomics.app.ui.common.ComicGenerator;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
+import com.einao.marvelcomics.domain.beans.DataError;
 import com.einao.marvelcomics.domain.threads.ThreadManager;
 import com.einao.marvelcomics.domain.usecases.ComicsUseCase;
 
@@ -16,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 /**
- * Created by Ana Aguilar.
+
  */
 @RunWith(MockitoJUnitRunner.class)
 public class MainPresenterTest {
@@ -60,7 +61,9 @@ public class MainPresenterTest {
         Mockito.doAnswer(new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                mainPresenter.onError("Error");
+                DataError error = new DataError();
+                error.setMessage("Error");
+                mainPresenter.onError(error);
                 return null;
             }
         }).when(comicsUseCase).execute();

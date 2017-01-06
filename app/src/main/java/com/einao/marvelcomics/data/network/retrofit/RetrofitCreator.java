@@ -4,7 +4,7 @@ import com.einao.marvelcomics.data.network.ComicNetworkDataSource;
 import com.einao.marvelcomics.data.network.NetworkDataSourceCreator;
 
 /**
- * Created by Ana Aguilar.
+
  */
 
 public class RetrofitCreator implements NetworkDataSourceCreator {

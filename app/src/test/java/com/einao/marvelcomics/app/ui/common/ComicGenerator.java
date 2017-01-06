@@ -4,7 +4,7 @@ import com.einao.marvelcomics.domain.beans.Comic;
 import com.einao.marvelcomics.domain.beans.Comics;
 
 /**
- * Created by Ana Aguilar.
+
  */
 
 public class ComicGenerator {

@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by Ana Aguilar.
+
  */
 
 public class Comics {

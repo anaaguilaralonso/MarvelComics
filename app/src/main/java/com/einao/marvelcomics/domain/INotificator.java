@@ -1,12 +1,11 @@
 package com.einao.marvelcomics.domain;
 
-/**
- * Created by Ana Aguilar.
- */
+import com.einao.marvelcomics.domain.beans.DataError;
+
 public interface INotificator<T> {
 
-    public void onSuccess(T response);
+    void onSuccess(T response);
 
-    public void onError(String error);
+    void onError(DataError error);
 
 }

@@ -6,7 +6,7 @@ import android.os.Looper;
 import com.einao.marvelcomics.domain.threads.ThreadManager;
 
 /**
- * Created by Ana Aguilar.
+
  */
 
 public class ThreadManagerImpl implements ThreadManager {

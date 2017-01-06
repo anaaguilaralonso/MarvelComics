@@ -10,7 +10,7 @@ import com.einao.marvelcomics.R;
 import butterknife.ButterKnife;
 
 /**
- * Created by Ana Aguilar.
+
  */
 
 public abstract class BaseActivity<T extends Presenter> extends AppCompatActivity implements BaseView {

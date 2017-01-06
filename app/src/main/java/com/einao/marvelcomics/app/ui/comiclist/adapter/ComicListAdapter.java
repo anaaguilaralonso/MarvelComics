@@ -12,10 +12,6 @@ import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
 
 import java.util.List;
 
-/**
- * Created by Ana Aguilar.
- */
-
 public class ComicListAdapter extends RecyclerView.Adapter<ComicViewHolder> {
 
     ComicsViewModel comicsViewModel;

@@ -1,7 +1,7 @@
 package com.einao.marvelcomics.app.ui.viewmodel;
 
 /**
- * Created by Ana Aguilar.
+
  */
 
 public class ComicViewModel {

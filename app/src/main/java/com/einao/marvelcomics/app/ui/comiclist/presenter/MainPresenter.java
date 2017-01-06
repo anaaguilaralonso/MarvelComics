@@ -1,8 +1,6 @@
 package com.einao.marvelcomics.app.ui.comiclist.presenter;
 
 
-import android.util.Log;
-
 import com.einao.marvelcomics.app.ui.comiclist.view.MainView;
 import com.einao.marvelcomics.app.ui.common.Presenter;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
@@ -10,13 +8,10 @@ import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
 import com.einao.marvelcomics.app.ui.viewmodel.mappers.ComicsMapper;
 import com.einao.marvelcomics.domain.INotificator;
 import com.einao.marvelcomics.domain.beans.Comics;
+import com.einao.marvelcomics.domain.beans.DataError;
 import com.einao.marvelcomics.domain.usecases.ComicsUseCase;
 
 import java.util.Iterator;
-
-/**
- * Created by Ana Aguilar.
- */
 
 public class MainPresenter implements Presenter, INotificator<Comics> {
 
@@ -54,7 +49,7 @@ public class MainPresenter implements Presenter, INotificator<Comics> {
     }
 
     @Override
-    public void onError(String error) {
-        mainView.showToast(error);
+    public void onError(DataError error) {
+        mainView.showToast(error.getMessage());
     }
 }

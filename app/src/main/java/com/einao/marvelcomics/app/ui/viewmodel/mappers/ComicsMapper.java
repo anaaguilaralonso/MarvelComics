@@ -8,7 +8,7 @@ import com.einao.marvelcomics.domain.beans.Comics;
 import java.util.Iterator;
 
 /**
- * Created by Ana Aguilar.
+
  */
 
 public class ComicsMapper {

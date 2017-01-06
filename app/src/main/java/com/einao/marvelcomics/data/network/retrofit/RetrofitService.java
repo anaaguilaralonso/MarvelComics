@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
- * Created by Ana Aguilar.
+
  */
 
 public interface RetrofitService {

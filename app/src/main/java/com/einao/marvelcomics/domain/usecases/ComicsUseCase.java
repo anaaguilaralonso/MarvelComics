@@ -7,10 +7,6 @@ import com.einao.marvelcomics.domain.beans.Comics;
 import com.einao.marvelcomics.domain.beans.DataResponse;
 import com.einao.marvelcomics.domain.threads.ThreadManager;
 
-/**
- * Created by Ana Aguilar.
- */
-
 public class ComicsUseCase extends UseCase<Comics, Void> {
 
     private ComicRepository comicRepository;
@@ -32,13 +28,12 @@ public class ComicsUseCase extends UseCase<Comics, Void> {
                 threadManager.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (dataResponse.hasError()){
-                            notificator.onError(dataResponse.getError());
-                        } else {
+                        if (dataResponse.isSuccessful()){
                             Comics comics = dataResponse.getData();
                             notificator.onSuccess(comics);
+                        } else {
+                            notificator.onError(dataResponse.getError());
                         }
-
                     }
                 });
             }

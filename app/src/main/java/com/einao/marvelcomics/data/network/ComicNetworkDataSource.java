@@ -7,7 +7,7 @@ import com.einao.marvelcomics.data.network.entities.marvelentities.ComicEntity;
 import java.util.List;
 
 /**
- * Created by Ana Aguilar.
+
  */
 
 public interface ComicNetworkDataSource extends DataSource {

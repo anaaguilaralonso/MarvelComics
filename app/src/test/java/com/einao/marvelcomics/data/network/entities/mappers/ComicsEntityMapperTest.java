@@ -16,7 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.List;
 
 /**
- * Created by Ana Aguilar.
+
  */
 @RunWith(MockitoJUnitRunner.class)
 
@@ -44,7 +44,7 @@ public class ComicsEntityMapperTest {
 
         DataResponse<Comics> dataResponse = comicsMapper.map(networkResponse);
 
-        Assert.assertTrue(dataResponse.hasError());
+        Assert.assertTrue(!dataResponse.isSuccessful());
     }
 
 }

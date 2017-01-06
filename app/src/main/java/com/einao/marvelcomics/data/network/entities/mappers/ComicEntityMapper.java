@@ -4,7 +4,7 @@ import com.einao.marvelcomics.data.network.entities.marvelentities.ComicEntity;
 import com.einao.marvelcomics.domain.beans.Comic;
 
 /**
- * Created by Ana Aguilar.
+
  */
 
 

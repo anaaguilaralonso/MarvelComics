@@ -1,5 +1,6 @@
 package com.einao.marvelcomics.data.network.common;
 
+import com.einao.marvelcomics.data.network.entities.NetworkError;
 import com.einao.marvelcomics.data.network.entities.NetworkResponse;
 import com.einao.marvelcomics.data.network.entities.marvelentities.ComicEntity;
 
@@ -7,15 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Ana Aguilar.
+
  */
 
 public class ComicEntityGenerator {
 
     public NetworkResponse getFailureNetworkComicsResponse(){
         NetworkResponse<List<ComicEntity>> networkResponse = new NetworkResponse<>();
-        networkResponse.setError("Error");
-        networkResponse.setCode(0);
+        NetworkError networkError = new NetworkError();
+        networkError.setMessage("Error");
+        networkResponse.setError(networkError);
         return networkResponse;
     }
 
