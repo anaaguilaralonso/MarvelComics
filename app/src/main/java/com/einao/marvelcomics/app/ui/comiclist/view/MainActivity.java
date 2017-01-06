@@ -5,19 +5,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.einao.marvelcomics.R;
-import com.einao.marvelcomics.app.App;
-import com.einao.marvelcomics.app.threads.ThreadManagerImpl;
 import com.einao.marvelcomics.app.ui.comiclist.adapter.ComicListAdapter;
 import com.einao.marvelcomics.app.ui.comiclist.presenter.MainPresenter;
 import com.einao.marvelcomics.app.ui.common.BaseActivity;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
-import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
-import com.einao.marvelcomics.data.ComicDataRepository;
-import com.einao.marvelcomics.data.network.ComicNetworkDataSource;
-import com.einao.marvelcomics.data.network.NetworkDataSourceCreator;
-import com.einao.marvelcomics.data.network.retrofit.RetrofitCreator;
-import com.einao.marvelcomics.domain.ComicRepository;
-import com.einao.marvelcomics.domain.usecases.ComicsUseCase;
 
 import butterknife.BindView;
 
@@ -44,7 +35,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
 
     @Override
     public MainPresenter initPresenter() {
-        return new MainPresenter(this, new ComicsUseCase(ThreadManagerImpl.getInstance(), comicRepository));
+        return new MainPresenter(this, comicsUseCase);
     }
 
     @Override
