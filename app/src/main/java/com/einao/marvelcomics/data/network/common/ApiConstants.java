@@ -1,13 +1,10 @@
-package com.einao.marvelcomics.app.common;
+package com.einao.marvelcomics.data.network.common;
 
 /**
 
  */
 
 public class ApiConstants {
-
-    public static final String HTTP_BASEURL = "https://gateway.marvel.com:443/v1/public/";
-    public static final String HTTP_ENDPOINT_HULK_COMICS = "characters/1009351/comics";
 
     public static final String HTTP_REQUEST_HASH = "e986d77d771fec0a5d1d0c15f0e0ea45";
     public static final String HTTP_REQUEST_TIMESTAMP = "1";

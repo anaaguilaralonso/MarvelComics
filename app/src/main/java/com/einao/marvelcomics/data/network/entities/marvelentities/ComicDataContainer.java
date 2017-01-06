@@ -11,7 +11,7 @@ public class ComicDataContainer {
     private Integer limit;
     private Integer total;
     private Integer count;
-    private List<ComicEntity> results = null;
+    private List<Result> results = null;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public Integer getOffset() {
@@ -46,11 +46,11 @@ public class ComicDataContainer {
         this.count = count;
     }
 
-    public List<ComicEntity> getResults() {
+    public List<Result> getResults() {
         return results;
     }
 
-    public void setResults(List<ComicEntity> results) {
+    public void setResults(List<Result> results) {
         this.results = results;
     }
 

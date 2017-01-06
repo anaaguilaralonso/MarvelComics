@@ -1,34 +1,28 @@
 package com.einao.marvelcomics.data;
 
+import com.einao.marvelcomics.data.entities.ComicsEntity;
+import com.einao.marvelcomics.data.entities.mappers.DataResponseMapper;
 import com.einao.marvelcomics.data.network.ComicNetworkDataSource;
-import com.einao.marvelcomics.data.network.NetworkDataSourceCreator;
 import com.einao.marvelcomics.data.network.entities.NetworkResponse;
-import com.einao.marvelcomics.data.network.entities.marvelentities.ComicEntity;
-import com.einao.marvelcomics.data.network.entities.mappers.ComicsEntityMapper;
-import com.einao.marvelcomics.data.network.retrofit.RetrofitCreator;
 import com.einao.marvelcomics.domain.ComicRepository;
 import com.einao.marvelcomics.domain.beans.Comics;
 import com.einao.marvelcomics.domain.beans.DataResponse;
 
-import java.util.List;
-
 public class ComicDataRepository implements ComicRepository {
 
     private final ComicNetworkDataSource networkDataSource;
-    private final NetworkDataSourceCreator networkDataSourceCreator;
 
-    public ComicDataRepository() {
-        networkDataSourceCreator = new RetrofitCreator();
-        networkDataSource = networkDataSourceCreator.factoryMethod();
+    public ComicDataRepository(ComicNetworkDataSource comicNetworkDataSource) {
+        networkDataSource = comicNetworkDataSource;
     }
 
     @Override
     public DataResponse<Comics> getComics() {
 
-        NetworkResponse<List<ComicEntity>> networkResponse = networkDataSource.getComics();
+        NetworkResponse<ComicsEntity> networkResponse = networkDataSource.getComics();
 
-        ComicsEntityMapper comicsMapper = new ComicsEntityMapper();
-        DataResponse<Comics> dataComicResponse = comicsMapper.map(networkResponse);
+        DataResponseMapper dataResponseMapper = new DataResponseMapper();
+        DataResponse<Comics> dataComicResponse = dataResponseMapper.map(networkResponse);
         return dataComicResponse;
     }
 

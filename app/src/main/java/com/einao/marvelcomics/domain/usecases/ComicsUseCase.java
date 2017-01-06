@@ -13,8 +13,8 @@ public class ComicsUseCase extends UseCase<Comics, Void> {
     private INotificator<Comics> notificator;
     private ThreadManager threadManager;
 
-    public ComicsUseCase(ThreadManager threadManager) {
-        comicRepository = new ComicDataRepository();
+    public ComicsUseCase(ThreadManager threadManager, ComicRepository comicRepository) {
+        this.comicRepository = comicRepository;
         this.threadManager = threadManager;
     }
 

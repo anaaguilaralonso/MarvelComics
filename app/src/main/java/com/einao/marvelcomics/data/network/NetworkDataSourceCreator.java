@@ -1,10 +1,6 @@
 package com.einao.marvelcomics.data.network;
 
-/**
-
- */
-
 public interface NetworkDataSourceCreator {
 
-    ComicNetworkDataSource factoryMethod();
+    ComicNetworkDataSource createComicDataSource();
 }

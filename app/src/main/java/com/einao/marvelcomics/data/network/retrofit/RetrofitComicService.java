@@ -1,6 +1,7 @@
 package com.einao.marvelcomics.data.network.retrofit;
 
-import com.einao.marvelcomics.app.common.ApiConstants;
+import com.einao.marvelcomics.data.network.common.ApiConstants;
+import com.einao.marvelcomics.data.network.common.Endpoints;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -11,9 +12,9 @@ import retrofit2.http.Query;
 
  */
 
-public interface RetrofitService {
+public interface RetrofitComicService {
 
-    @GET(ApiConstants.HTTP_ENDPOINT_HULK_COMICS)
+    @GET(Endpoints.HTTP_ENDPOINT_HULK_COMICS)
     Call<ResponseBody> listComics(@Query("ts") String ts, @Query("hash") String hash, @Query("apikey") String apiKey, @Query("limit") int limit);
 
 }

@@ -5,12 +5,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.einao.marvelcomics.R;
+import com.einao.marvelcomics.app.App;
 import com.einao.marvelcomics.app.threads.ThreadManagerImpl;
 import com.einao.marvelcomics.app.ui.comiclist.adapter.ComicListAdapter;
 import com.einao.marvelcomics.app.ui.comiclist.presenter.MainPresenter;
 import com.einao.marvelcomics.app.ui.common.BaseActivity;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
+import com.einao.marvelcomics.data.ComicDataRepository;
+import com.einao.marvelcomics.data.network.ComicNetworkDataSource;
+import com.einao.marvelcomics.data.network.NetworkDataSourceCreator;
+import com.einao.marvelcomics.data.network.retrofit.RetrofitCreator;
+import com.einao.marvelcomics.domain.ComicRepository;
 import com.einao.marvelcomics.domain.usecases.ComicsUseCase;
 
 import butterknife.BindView;
@@ -21,9 +27,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     @BindView(R.id.comics_list)
     RecyclerView comicRecyclerView;
 
-    private ComicsViewModel comicList;
-    private RecyclerView.Adapter comicListAdapter;
-
+    private ComicListAdapter comicListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +36,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         comicRecyclerView.setLayoutManager(layoutManager);
 
-        comicList = new ComicsViewModel();
-        comicListAdapter = new ComicListAdapter(comicList);
+        comicListAdapter = new ComicListAdapter();
         comicRecyclerView.setAdapter(comicListAdapter);
 
         presenter.start();
@@ -41,7 +44,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
 
     @Override
     public MainPresenter initPresenter() {
-        return new MainPresenter(this, new ComicsUseCase(ThreadManagerImpl.getInstance()));
+        return new MainPresenter(this, new ComicsUseCase(ThreadManagerImpl.getInstance(), comicRepository));
     }
 
     @Override
@@ -55,8 +58,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     }
 
     @Override
-    public void addComic(final ComicViewModel comic) {
-        comicList.add(comic);
-        comicListAdapter.notifyDataSetChanged();
+    public void addComic(ComicViewModel comic) {
+        comicListAdapter.add(comic);
     }
 }
