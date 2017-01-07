@@ -3,12 +3,11 @@ package com.einao.marvelcomics.data.network;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.einao.marvelcomics.data.entities.ComicEntity;
 import com.einao.marvelcomics.data.entities.ComicsEntity;
 import com.einao.marvelcomics.data.network.common.ApiConstants;
 import com.einao.marvelcomics.data.network.entities.NetworkError;
 import com.einao.marvelcomics.data.network.entities.NetworkResponse;
-import com.einao.marvelcomics.data.network.entities.mappers.CustomComicsEntityMapper;
+import com.einao.marvelcomics.data.network.entities.mappers.NetworkComicsEntityMapper;
 import com.einao.marvelcomics.data.network.entities.marvelentities.ComicDataContainer;
 import com.einao.marvelcomics.data.network.entities.marvelentities.ComicDataWrapper;
 import com.einao.marvelcomics.data.network.entities.marvelentities.Result;
@@ -23,12 +22,15 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class ComicNetworkDataSourceRetrofit implements ComicNetworkDataSource {
+public final class ComicNetworkDataSourceRetrofit implements ComicNetworkDataSource {
 
-    RetrofitComicService retrofitComicService;
+    private final RetrofitComicService retrofitComicService;
+
+    private Long lastComicsRequest;
 
     public ComicNetworkDataSourceRetrofit(RetrofitClient retrofitClient) {
         this.retrofitComicService = retrofitClient.getComicService();
+        lastComicsRequest = 0L;
     }
 
     @Override
@@ -47,6 +49,7 @@ public class ComicNetworkDataSourceRetrofit implements ComicNetworkDataSource {
         if (response.isSuccessful()) {
             NetworkResponse<ComicsEntity> networkResponse = new NetworkResponse<>();
             networkResponse.setResponse(getComicsFromResponse(response));
+            lastComicsRequest = System.nanoTime() / 1000;
             return networkResponse;
         } else {
             return getErrorResponse(response.code(), response.message());
@@ -79,7 +82,7 @@ public class ComicNetworkDataSourceRetrofit implements ComicNetworkDataSource {
     private ComicsEntity mapJsonToComicEntities(String json) {
         List<Result> results = getComicResults(json);
 
-        CustomComicsEntityMapper comicsEntityMapper = new CustomComicsEntityMapper();
+        NetworkComicsEntityMapper comicsEntityMapper = new NetworkComicsEntityMapper();
         return comicsEntityMapper.map(results);
     }
 
@@ -90,4 +93,10 @@ public class ComicNetworkDataSourceRetrofit implements ComicNetworkDataSource {
         ComicDataContainer comicDataContainer = comicDataWrapper.getData();
         return comicDataContainer.getResults();
     }
+
+    @Override
+    public Long getLastComicsRequest() {
+        return lastComicsRequest;
+    }
+
 }
