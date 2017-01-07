@@ -5,23 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.einao.marvelcomics.R;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
 
-import java.util.List;
-
-/**
- * Created by Ana Aguilar.
- */
-
 public class ComicListAdapter extends RecyclerView.Adapter<ComicViewHolder> {
 
-    ComicsViewModel comicsViewModel;
+    private ComicsViewModel comicsViewModel;
 
-    public ComicListAdapter(ComicsViewModel comicsViewModel){
-        this.comicsViewModel = comicsViewModel;
+    public ComicListAdapter() {
+        this.comicsViewModel = new ComicsViewModel();
     }
 
     @Override
@@ -43,6 +36,11 @@ public class ComicListAdapter extends RecyclerView.Adapter<ComicViewHolder> {
     public void onBindViewHolder(ComicViewHolder holder, int position) {
         ComicViewModel comicViewModel = comicsViewModel.getItem(position);
         holder.title.setText(comicViewModel.getTitle());
+    }
+
+    public void add(ComicViewModel comicViewModel){
+        comicsViewModel.add(comicViewModel);
+        notifyItemInserted(comicsViewModel.getCount() - 1);
     }
 
 }

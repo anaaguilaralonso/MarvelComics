@@ -5,7 +5,7 @@ import com.einao.marvelcomics.app.ui.common.BaseView;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 
 /**
- * Created by Ana Aguilar.
+
  */
 
 public interface MainView extends BaseView {

@@ -11,7 +11,7 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 /**
- * Created by Ana Aguilar.
+
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ComicMapperTest {

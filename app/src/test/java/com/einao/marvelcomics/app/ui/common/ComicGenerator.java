@@ -3,10 +3,6 @@ package com.einao.marvelcomics.app.ui.common;
 import com.einao.marvelcomics.domain.beans.Comic;
 import com.einao.marvelcomics.domain.beans.Comics;
 
-/**
- * Created by Ana Aguilar.
- */
-
 public class ComicGenerator {
 
     public Comic getSimpleComic() {

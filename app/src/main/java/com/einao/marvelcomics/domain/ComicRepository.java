@@ -1,8 +1,10 @@
 package com.einao.marvelcomics.domain;
 
-/**
- * Created by Ana Aguilar.
- */
+import com.einao.marvelcomics.domain.beans.Comics;
+import com.einao.marvelcomics.domain.beans.DataResponse;
 
-public interface ComicRepository  {
+public interface ComicRepository {
+
+    DataResponse<Comics>  getComics();
+
 }

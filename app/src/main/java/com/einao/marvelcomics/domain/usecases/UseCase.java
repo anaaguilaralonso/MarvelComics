@@ -1,7 +1,10 @@
 package com.einao.marvelcomics.domain.usecases;
 
 /**
- * Created by Ana Aguilar.
+
  */
-public class UseCase <T, Z> {
+public abstract class UseCase<T, Z> {
+
+    public abstract void execute();
+
 }

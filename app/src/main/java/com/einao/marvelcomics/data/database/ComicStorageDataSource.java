@@ -1,10 +1,8 @@
 package com.einao.marvelcomics.data.database;
 
-import com.einao.marvelcomics.data.DataSource;
+import com.einao.marvelcomics.data.entities.ComicsEntity;
+import com.einao.marvelcomics.domain.beans.DataResponse;
 
-/**
- * Created by Ana Aguilar.
- */
-
-public interface ComicStorageDataSource extends DataSource{
+public interface ComicStorageDataSource {
+    DataResponse<ComicsEntity> getComics();
 }

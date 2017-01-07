@@ -9,7 +9,6 @@ import com.einao.marvelcomics.app.ui.comiclist.adapter.ComicListAdapter;
 import com.einao.marvelcomics.app.ui.comiclist.presenter.MainPresenter;
 import com.einao.marvelcomics.app.ui.common.BaseActivity;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
-import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
 
 import butterknife.BindView;
 
@@ -19,9 +18,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     @BindView(R.id.comics_list)
     RecyclerView comicRecyclerView;
 
-    private ComicsViewModel comicList;
-    private RecyclerView.Adapter comicListAdapter;
-
+    private ComicListAdapter comicListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +27,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         comicRecyclerView.setLayoutManager(layoutManager);
 
-        comicList = new ComicsViewModel();
-        comicListAdapter = new ComicListAdapter(comicList);
+        comicListAdapter = new ComicListAdapter();
         comicRecyclerView.setAdapter(comicListAdapter);
 
         presenter.start();
@@ -39,7 +35,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
 
     @Override
     public MainPresenter initPresenter() {
-        return new MainPresenter(this);
+        return new MainPresenter(this, comicsUseCase);
+    }
+
+    @Override
+    public void injectDependencies() {
+
     }
 
     @Override
@@ -49,6 +50,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
 
     @Override
     public void addComic(ComicViewModel comic) {
-        comicList.add(comic);
+        comicListAdapter.add(comic);
     }
 }
