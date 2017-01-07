@@ -27,7 +27,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         comicRecyclerView.setLayoutManager(layoutManager);
 
-        comicListAdapter = new ComicListAdapter();
+        comicListAdapter = new ComicListAdapter(this);
         comicRecyclerView.setAdapter(comicListAdapter);
 
         presenter.start();

@@ -1,13 +1,16 @@
-package com.einao.marvelcomics.data.entities;
+package com.einao.marvelcomics.data.database.realm.entities;
 
-public class ComicEntity {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-    String title;
-    String description;
-    String imageUrl;
+public class ComicRealmObject extends RealmObject {
 
-    public ComicEntity() {
-    }
+    @PrimaryKey
+    private long id;
+
+    private String title;
+    private String description;
+    private String imageUrl;
 
     public String getTitle() {
         return title;

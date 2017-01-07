@@ -7,10 +7,8 @@ package com.einao.marvelcomics.domain.beans;
 public class Comic {
 
     private String title;
-
-    public Comic(String title) {
-        this.title = title;
-    }
+    private String description;
+    private String imageUrl;
 
     public Comic() {
     }
@@ -21,5 +19,21 @@ public class Comic {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

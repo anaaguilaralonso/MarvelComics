@@ -1,18 +1,9 @@
 package com.einao.marvelcomics.app.ui.viewmodel;
 
-/**
-
- */
-
 public class ComicViewModel {
 
-    private String title;
+    public String title;
+    public String description;
+    public String imageUrl;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }
