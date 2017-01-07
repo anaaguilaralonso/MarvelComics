@@ -3,6 +3,7 @@ package com.einao.marvelcomics.app.ui.comiclist.view;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Button;
 
 import com.einao.marvelcomics.R;
 import com.einao.marvelcomics.app.ui.comiclist.adapter.ComicListAdapter;
@@ -11,6 +12,7 @@ import com.einao.marvelcomics.app.ui.common.BaseActivity;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainView {
@@ -27,7 +29,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         comicRecyclerView.setLayoutManager(layoutManager);
 
-        comicListAdapter = new ComicListAdapter(this);
+        comicListAdapter = new ComicListAdapter(this, imageLoader);
         comicRecyclerView.setAdapter(comicListAdapter);
 
         presenter.start();
@@ -43,6 +45,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
 
     }
 
+    @OnClick(R.id.button)
+    public void onClickButton(){
+        presenter.start();
+    }
+
     @Override
     public int getLayout() {
         return R.layout.activity_main;
@@ -51,5 +58,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     @Override
     public void addComic(ComicViewModel comic) {
         comicListAdapter.add(comic);
+    }
+
+    @Override
+    public void removeAllComics() {
+        comicListAdapter.removeAll();
     }
 }

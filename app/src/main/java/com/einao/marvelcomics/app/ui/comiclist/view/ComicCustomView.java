@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.einao.marvelcomics.R;
+import com.einao.marvelcomics.app.ui.provider.image.ImageLoader;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 
 import butterknife.BindView;
@@ -23,9 +24,11 @@ public class ComicCustomView extends RelativeLayout {
     @BindView(R.id.description)
     TextView description;
 
+    ImageLoader imageLoader;
 
-    public ComicCustomView(Context context) {
+    public ComicCustomView(Context context, ImageLoader imageLoader) {
         super(context);
+        this.imageLoader = imageLoader;
         setup();
     }
 
@@ -35,14 +38,10 @@ public class ComicCustomView extends RelativeLayout {
         ButterKnife.bind(this);
     }
 
-    public void setImage(String imageUrl) {
-
-    }
-
     public void setComicRow(ComicViewModel comicViewModel) {
-        setImage(comicViewModel.imageUrl);
         this.title.setText(comicViewModel.title);
         this.description.setText(comicViewModel.description);
+        imageLoader.loadImage(image, comicViewModel.imageUrl);
     }
 
 }

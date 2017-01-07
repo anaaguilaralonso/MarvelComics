@@ -35,6 +35,7 @@ public class MainPresenter implements Presenter, INotificator<Comics> {
     }
 
     private void showComicList(ComicsViewModel comicList) {
+        mainView.removeAllComics();
         Iterator<ComicViewModel> iterator = comicList.iterator();
         while (iterator.hasNext()) {
             mainView.addComic(iterator.next());

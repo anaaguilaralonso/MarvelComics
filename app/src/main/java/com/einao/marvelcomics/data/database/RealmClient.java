@@ -1,16 +1,26 @@
 package com.einao.marvelcomics.data.database;
 
+import android.content.Context;
+
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class RealmClient {
 
-    Realm realm;
+    public RealmClient(Context context) {
+        Realm.init(context);
 
-    public RealmClient() {
-        realm = Realm.getDefaultInstance();
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(config);
     }
 
     public Realm getRealm() {
-        return realm;
+        return Realm.getDefaultInstance();
+    }
+
+    public void closeRealm(Realm realm){
+        realm.close();
     }
 }

@@ -1,14 +1,17 @@
 package com.einao.marvelcomics.data;
 
+import android.support.annotation.NonNull;
+
 import com.einao.marvelcomics.data.database.ComicStorageDataSource;
 import com.einao.marvelcomics.data.entities.ComicsEntity;
+import com.einao.marvelcomics.data.entities.mappers.ComicsEntityMapper;
 import com.einao.marvelcomics.data.entities.mappers.DataResponseMapper;
 import com.einao.marvelcomics.data.network.ComicNetworkDataSource;
 import com.einao.marvelcomics.data.network.entities.NetworkResponse;
 import com.einao.marvelcomics.domain.ComicRepository;
-import com.einao.marvelcomics.domain.policy.DatabasePolicy;
 import com.einao.marvelcomics.domain.beans.Comics;
 import com.einao.marvelcomics.domain.beans.DataResponse;
+import com.einao.marvelcomics.domain.policy.DatabasePolicy;
 
 public class ComicDataRepository implements ComicRepository {
 
@@ -27,10 +30,14 @@ public class ComicDataRepository implements ComicRepository {
     @Override
     public DataResponse<Comics> getComics() {
 
-        if (databasePolicy.isValid(networkDataSource.getLastComicsRequest())){
+        if (databasePolicy.isValid(networkDataSource.getLastComicsRequest())) {
             return getComicsDatabase();
-        }else {
-            return getComicsNetwork();
+        } else {
+            DataResponse<Comics> comicsNetwork = getComicsNetwork();
+
+            storageDataSource.saveComics(comicsNetwork.getData());
+
+            return comicsNetwork;
         }
     }
 
@@ -42,9 +49,22 @@ public class ComicDataRepository implements ComicRepository {
     }
 
     public DataResponse<Comics> getComicsDatabase() {
-        DataResponse<Comics> databaseResponse =  new DataResponse<>();
+        DataResponse<ComicsEntity> comicsEntity = storageDataSource.getComics();
 
+        return mapDataResponse(comicsEntity);
+    }
 
-        return databaseResponse;
+    @NonNull
+    private DataResponse<Comics> mapDataResponse(DataResponse<ComicsEntity> comicsEntity) {
+        Comics comics = map(comicsEntity);
+
+        DataResponse<Comics> comicsDataResponse = new DataResponse<>();
+        comicsDataResponse.setData(comics);
+        return comicsDataResponse;
+    }
+
+    private Comics map(DataResponse<ComicsEntity> comicsEntity) {
+        ComicsEntityMapper comicsMapper = new ComicsEntityMapper();
+        return comicsMapper.map(comicsEntity.getData());
     }
 }

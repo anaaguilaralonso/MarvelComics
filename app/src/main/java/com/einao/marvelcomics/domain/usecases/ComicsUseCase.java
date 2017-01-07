@@ -41,6 +41,7 @@ public class ComicsUseCase extends UseCase<Comics, Void> {
         thread.start();
     }
 
+    @Override
     public void registerNotificator(INotificator<Comics> notification) {
         this.notificator = notification;
     }

@@ -49,7 +49,7 @@ public final class ComicNetworkDataSourceRetrofit implements ComicNetworkDataSou
         if (response.isSuccessful()) {
             NetworkResponse<ComicsEntity> networkResponse = new NetworkResponse<>();
             networkResponse.setResponse(getComicsFromResponse(response));
-            lastComicsRequest = System.nanoTime() / 1000;
+            lastComicsRequest = System.nanoTime() / (1000*1000);
             return networkResponse;
         } else {
             return getErrorResponse(response.code(), response.message());

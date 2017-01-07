@@ -11,6 +11,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".app.ui.comiclist.view.MainActivity">
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/comics_list"
         android:layout_width="match_parent"
