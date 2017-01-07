@@ -7,6 +7,8 @@ public class StorageComicRealmGenerator {
     public ComicRealmObject getSimpleComic() {
         ComicRealmObject comic = new ComicRealmObject();
         comic.setTitle("Comic Title " + Math.random());
+        comic.setDescription("Description of the comic: "+comic.getTitle());
+        comic.setImageUrl("http://www.ab.com");
         return comic;
     }
 

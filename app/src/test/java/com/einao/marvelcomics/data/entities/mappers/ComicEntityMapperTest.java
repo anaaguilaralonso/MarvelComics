@@ -26,4 +26,24 @@ public class ComicEntityMapperTest {
         Assert.assertTrue(comic.getTitle().compareTo(comicEntity.getTitle()) == 0);
     }
 
+    @Test
+    public void onComicsMap_checkDescription() {
+        ComicEntityGenerator comicGenerator = new ComicEntityGenerator();
+        ComicEntity comicEntity = comicGenerator.getSimpleComic();
+
+        Comic comic = comicMapper.map(comicEntity);
+
+        Assert.assertTrue(comic.getDescription().compareTo(comicEntity.getDescription()) == 0);
+    }
+
+    @Test
+    public void onComicsMap_checkImage() {
+        ComicEntityGenerator comicGenerator = new ComicEntityGenerator();
+        ComicEntity comicEntity = comicGenerator.getSimpleComic();
+
+        Comic comic = comicMapper.map(comicEntity);
+
+        Assert.assertTrue(comic.getImageUrl().compareTo(comicEntity.getImageUrl()) == 0);
+    }
+
 }

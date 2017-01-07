@@ -8,6 +8,8 @@ public class ComicGenerator {
     public Comic getSimpleComic() {
         Comic comic = new Comic();
         comic.setTitle("Comic Title " + Math.random());
+        comic.setDescription("Description of the comic " + comic.getTitle());
+        comic.setImageUrl("http://www.url.com");
         return comic;
     }
 

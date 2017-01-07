@@ -27,5 +27,24 @@ public class StorageComicEntityMapperTest {
         Assert.assertTrue(comic.getTitle().compareTo(simpleComic.getTitle()) == 0);
     }
 
+    @Test
+    public void onComicsMap_checkDescription() {
+        StorageComicRealmGenerator comicGenerator = new StorageComicRealmGenerator();
+        ComicRealmObject simpleComic = comicGenerator.getSimpleComic();
+
+        ComicEntity comic = comicMapper.map(simpleComic);
+
+        Assert.assertTrue(comic.getDescription().compareTo(simpleComic.getDescription()) == 0);
+    }
+
+    @Test
+    public void onComicsMap_checkImage() {
+        StorageComicRealmGenerator comicGenerator = new StorageComicRealmGenerator();
+        ComicRealmObject simpleComic = comicGenerator.getSimpleComic();
+
+        ComicEntity comic = comicMapper.map(simpleComic);
+
+        Assert.assertTrue(comic.getImageUrl().compareTo(simpleComic.getImageUrl()) == 0);
+    }
 
 }
