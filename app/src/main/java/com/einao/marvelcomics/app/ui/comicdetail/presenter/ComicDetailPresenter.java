@@ -4,13 +4,12 @@ import com.einao.marvelcomics.app.ui.comicdetail.view.ComicDetailView;
 import com.einao.marvelcomics.app.ui.common.Presenter;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 
-public class ComicDetailPresenter implements Presenter {
+public class ComicDetailPresenter extends Presenter<ComicDetailView> {
 
-    ComicDetailView comicDetailView;
     ComicViewModel comic;
 
     public ComicDetailPresenter(ComicDetailView comicDetailView) {
-        this.comicDetailView = comicDetailView;
+        super(comicDetailView);
     }
 
     @Override
@@ -19,9 +18,10 @@ public class ComicDetailPresenter implements Presenter {
     }
 
     private void showComic() {
-        comicDetailView.setTitle(comic.title);
-        comicDetailView.setDescription(comic.description);
-        comicDetailView.setImage(comic.imageUrl);
+        if(!existView()) return;
+        view.get().setTitle(comic.title);
+        view.get().setDescription(comic.description);
+        view.get().setImage(comic.imageUrl);
     }
 
     @Override
@@ -32,4 +32,6 @@ public class ComicDetailPresenter implements Presenter {
     public void setComic(ComicViewModel comic) {
         this.comic = comic;
     }
+
+
 }

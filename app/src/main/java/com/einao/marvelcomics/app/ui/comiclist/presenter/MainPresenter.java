@@ -12,12 +12,9 @@ import com.einao.marvelcomics.domain.beans.DataError;
 import com.einao.marvelcomics.domain.providers.Navigator;
 import com.einao.marvelcomics.domain.usecases.ComicsUseCase;
 
-import java.lang.ref.WeakReference;
 import java.util.Iterator;
 
-public class MainPresenter implements Presenter {
-
-    private WeakReference<MainView> mainView;
+public class MainPresenter extends Presenter<MainView> {
 
     private ComicsUseCase comicsUseCase;
 
@@ -25,7 +22,7 @@ public class MainPresenter implements Presenter {
 
     public MainPresenter(MainView mainView, Navigator<ComicViewModel> comicViewModelNavigator, ComicsUseCase
             comicsUseCase) {
-        this.mainView = new WeakReference<>(mainView);
+        super(mainView);
         this.comicsUseCase = comicsUseCase;
         this.comicViewModelNavigator = comicViewModelNavigator;
     }
@@ -46,19 +43,14 @@ public class MainPresenter implements Presenter {
     }
 
     private void showComicList(ComicsViewModel comicList) {
-        if (existView()) {
-            mainView.get().removeAllComics();
-        }
+        if (!existView()) return;
+        view.get().removeAllComics();
+
         Iterator<ComicViewModel> iterator = comicList.iterator();
         while (iterator.hasNext()) {
-            if (existView()) {
-                mainView.get().addComic(iterator.next());
-            }
+            if (!existView()) return;
+            view.get().addComic(iterator.next());
         }
-    }
-
-    private boolean existView() {
-        return mainView.get() != null;
     }
 
     protected ICallback<Comics> callback = new ICallback<Comics>() {
@@ -71,9 +63,8 @@ public class MainPresenter implements Presenter {
 
         @Override
         public void onError(DataError error) {
-            if (existView()) {
-                mainView.get().showToast(error.getMessage());
-            }
+            if (!existView()) return;
+            view.get().showToast(error.getMessage());
         }
     };
 

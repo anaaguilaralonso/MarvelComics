@@ -1,9 +1,21 @@
 package com.einao.marvelcomics.app.ui.common;
 
-public interface Presenter {
+import java.lang.ref.WeakReference;
 
-    void start();
+public abstract class Presenter<TView> {
 
-    void stop();
+    protected final WeakReference<TView> view;
+
+    protected Presenter(TView view) {
+        this.view = new WeakReference<>(view);
+    }
+
+    public abstract void start();
+
+    public abstract void stop();
+
+    public boolean existView() {
+        return view.get() != null;
+    }
 
 }

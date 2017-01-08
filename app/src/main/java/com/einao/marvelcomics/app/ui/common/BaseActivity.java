@@ -2,7 +2,11 @@ package com.einao.marvelcomics.app.ui.common;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.einao.marvelcomics.app.App;
@@ -49,9 +53,33 @@ public abstract class BaseActivity<T extends Presenter> extends AppCompatActivit
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (getMenu() != 0) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(getMenu(), menu);
+            return true;
+        }else{
+            return super.onCreateOptionsMenu(menu);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return onOptionsItemSelected(item);
+        }
+    }
+
     public abstract int getLayout();
 
     public abstract T initPresenter();
+
+    public abstract int getMenu();
 
     @Override
     public void showToast(String error) {

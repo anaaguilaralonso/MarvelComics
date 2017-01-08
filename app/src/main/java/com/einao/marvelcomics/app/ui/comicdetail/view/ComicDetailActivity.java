@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.einao.marvelcomics.R;
+import com.einao.marvelcomics.app.common.ExtraConstants;
 import com.einao.marvelcomics.app.ui.comicdetail.presenter.ComicDetailPresenter;
 import com.einao.marvelcomics.app.ui.common.BaseActivity;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
@@ -27,8 +28,10 @@ public class ComicDetailActivity extends BaseActivity<ComicDetailPresenter> impl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
-        ComicViewModel comic = intent.getParcelableExtra("comic");
+        ComicViewModel comic = intent.getParcelableExtra(ExtraConstants.COMIC_EXTRA);
         presenter.setComic(comic);
 
         presenter.start();
@@ -37,6 +40,11 @@ public class ComicDetailActivity extends BaseActivity<ComicDetailPresenter> impl
     @Override
     public int getLayout() {
         return R.layout.activity_comic_detail;
+    }
+
+    @Override
+    public int getMenu() {
+        return 0;
     }
 
     @Override

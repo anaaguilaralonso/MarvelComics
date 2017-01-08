@@ -3,6 +3,7 @@ package com.einao.marvelcomics.app.ui.provider.navigator;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.einao.marvelcomics.app.common.ExtraConstants;
 import com.einao.marvelcomics.app.ui.comicdetail.view.ComicDetailActivity;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 import com.einao.marvelcomics.domain.providers.Navigator;
@@ -18,7 +19,7 @@ public class DetailNavigator implements Navigator<ComicViewModel> {
     @Override
     public void goTo(ComicViewModel comic) {
         Intent intent = new Intent(activity, ComicDetailActivity.class);
-        intent.putExtra("comic", comic);
+        intent.putExtra(ExtraConstants.COMIC_EXTRA, comic);
         activity.startActivity(intent);
     }
 }
