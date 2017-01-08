@@ -8,12 +8,12 @@ import java.util.Random;
 public class ComicObjectMother {
 
     public Comic getSimpleComic() {
-        Comic comic = new Comic();
-        comic.setId(new Random().nextInt());
-        comic.setTitle("Comic Title " + Math.random());
-        comic.setDescription("Description of the comic " + comic.getTitle());
-        comic.setImageUrl("http://www.url.com");
-        return comic;
+        Comic.ComicBuilder comicBuilder = new Comic.ComicBuilder();
+        comicBuilder.setId(new Random().nextInt());
+        comicBuilder.setTitle("Comic Title " + Math.random());
+        comicBuilder.setDescription("Description of the comic");
+        comicBuilder.setImageUrl("http://www.url.com");
+        return comicBuilder.build();
     }
 
     public Comics getSimpleComicList(int numberItems) {
