@@ -38,3 +38,9 @@ captures/
 
 # Keystore files
 *.jks
+
+# Windows thumbnail db
+Thumbs.db
+
+# OSX files
+.DS_Store

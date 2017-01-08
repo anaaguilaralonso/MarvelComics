@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.einao.marvelcomics.app.ui.widget.ComicView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/comic_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
