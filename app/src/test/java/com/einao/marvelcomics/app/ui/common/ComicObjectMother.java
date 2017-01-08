@@ -3,10 +3,13 @@ package com.einao.marvelcomics.app.ui.common;
 import com.einao.marvelcomics.domain.beans.Comic;
 import com.einao.marvelcomics.domain.beans.Comics;
 
-public class ComicGenerator {
+import java.util.Random;
+
+public class ComicObjectMother {
 
     public Comic getSimpleComic() {
         Comic comic = new Comic();
+        comic.setId(new Random().nextInt());
         comic.setTitle("Comic Title " + Math.random());
         comic.setDescription("Description of the comic " + comic.getTitle());
         comic.setImageUrl("http://www.url.com");

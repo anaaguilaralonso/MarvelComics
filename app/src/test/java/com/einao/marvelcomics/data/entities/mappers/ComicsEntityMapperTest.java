@@ -1,6 +1,6 @@
 package com.einao.marvelcomics.data.entities.mappers;
 
-import com.einao.marvelcomics.data.ComicEntityGenerator;
+import com.einao.marvelcomics.data.ComicEntityObjectMother;
 import com.einao.marvelcomics.data.entities.ComicsEntity;
 import com.einao.marvelcomics.domain.beans.Comics;
 
@@ -19,7 +19,7 @@ public class ComicsEntityMapperTest {
     @Test
     public void onSuccess_addAllComics() {
         int numberOfComics = 4;
-        ComicEntityGenerator comicGenerator = new ComicEntityGenerator();
+        ComicEntityObjectMother comicGenerator = new ComicEntityObjectMother();
         ComicsEntity comicsEntity = comicGenerator.getSimpleComicList(numberOfComics);
 
         Comics comics = comicsMapper.map(comicsEntity);

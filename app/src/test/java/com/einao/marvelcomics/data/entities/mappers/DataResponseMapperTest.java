@@ -1,6 +1,6 @@
 package com.einao.marvelcomics.data.entities.mappers;
 
-import com.einao.marvelcomics.data.ComicEntityGenerator;
+import com.einao.marvelcomics.data.ComicEntityObjectMother;
 import com.einao.marvelcomics.data.entities.ComicsEntity;
 import com.einao.marvelcomics.data.network.entities.NetworkError;
 import com.einao.marvelcomics.data.network.entities.NetworkResponse;
@@ -22,7 +22,7 @@ public class DataResponseMapperTest {
     @Test
     public void onSuccess_responseSuccessful() {
         int numberOfComics = 4;
-        ComicEntityGenerator comicGenerator = new ComicEntityGenerator();
+        ComicEntityObjectMother comicGenerator = new ComicEntityObjectMother();
         ComicsEntity comics = comicGenerator.getSimpleComicList(numberOfComics);
         NetworkResponse<ComicsEntity> networkResponse = new NetworkResponse<>();
         networkResponse.setResponse(comics);

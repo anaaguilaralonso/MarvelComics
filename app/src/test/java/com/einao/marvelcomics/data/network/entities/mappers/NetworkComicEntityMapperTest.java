@@ -1,7 +1,7 @@
 package com.einao.marvelcomics.data.network.entities.mappers;
 
 import com.einao.marvelcomics.data.entities.ComicEntity;
-import com.einao.marvelcomics.data.network.common.NetworkComicResultGenerator;
+import com.einao.marvelcomics.data.network.common.NetworkComicResultObjectMother;
 import com.einao.marvelcomics.data.network.entities.marvelentities.Result;
 
 import org.junit.Assert;
@@ -18,7 +18,7 @@ public class NetworkComicEntityMapperTest {
 
     @Test
     public void onComicsMap_checkTitle() {
-        NetworkComicResultGenerator comicGenerator = new NetworkComicResultGenerator();
+        NetworkComicResultObjectMother comicGenerator = new NetworkComicResultObjectMother();
         Result result = comicGenerator.getSimpleComic();
 
         ComicEntity comic = comicMapper.map(result);
