@@ -7,7 +7,9 @@ import android.widget.Toast;
 
 import com.einao.marvelcomics.app.App;
 import com.einao.marvelcomics.app.provider.UseCaseProvider;
+import com.einao.marvelcomics.app.ui.provider.navigator.NavigatorProvider;
 import com.einao.marvelcomics.domain.providers.ImageLoader;
+import com.einao.marvelcomics.domain.providers.Navigator;
 
 import butterknife.ButterKnife;
 
@@ -17,6 +19,7 @@ public abstract class BaseActivity<T extends Presenter> extends AppCompatActivit
 
     protected UseCaseProvider useCaseProvider;
     protected ImageLoader imageLoader;
+    protected NavigatorProvider navigatorProvider;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +31,8 @@ public abstract class BaseActivity<T extends Presenter> extends AppCompatActivit
 
         useCaseProvider = ((App) this.getApplication()).useCaseProvider;
         imageLoader = ((App) this.getApplication()).getImageLoader();
+
+        navigatorProvider = new NavigatorProvider();
 
         if (presenter == null) {
             presenter = initPresenter();

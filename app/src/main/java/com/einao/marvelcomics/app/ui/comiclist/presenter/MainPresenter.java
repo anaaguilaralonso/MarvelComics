@@ -9,6 +9,7 @@ import com.einao.marvelcomics.app.ui.viewmodel.mappers.ComicsMapper;
 import com.einao.marvelcomics.domain.ICallback;
 import com.einao.marvelcomics.domain.beans.Comics;
 import com.einao.marvelcomics.domain.beans.DataError;
+import com.einao.marvelcomics.domain.providers.Navigator;
 import com.einao.marvelcomics.domain.usecases.ComicsUseCase;
 
 import java.lang.ref.WeakReference;
@@ -20,9 +21,13 @@ public class MainPresenter implements Presenter {
 
     private ComicsUseCase comicsUseCase;
 
-    public MainPresenter(MainView mainView, ComicsUseCase comicsUseCase) {
+    private Navigator<ComicViewModel> comicViewModelNavigator;
+
+    public MainPresenter(MainView mainView, Navigator<ComicViewModel> comicViewModelNavigator, ComicsUseCase
+            comicsUseCase) {
         this.mainView = new WeakReference<>(mainView);
         this.comicsUseCase = comicsUseCase;
+        this.comicViewModelNavigator = comicViewModelNavigator;
     }
 
     @Override
@@ -71,4 +76,8 @@ public class MainPresenter implements Presenter {
             }
         }
     };
+
+    public void onComicClicked(ComicViewModel comicViewModel) {
+        comicViewModelNavigator.goTo(comicViewModel);
+    }
 }
