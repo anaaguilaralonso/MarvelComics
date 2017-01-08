@@ -82,7 +82,7 @@ public abstract class BaseActivity<T extends Presenter> extends AppCompatActivit
     public abstract int getMenu();
 
     @Override
-    public void showToast(String error) {
-        Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

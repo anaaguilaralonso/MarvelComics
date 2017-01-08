@@ -6,7 +6,7 @@ import com.einao.marvelcomics.app.ui.common.Presenter;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
 import com.einao.marvelcomics.app.ui.viewmodel.mappers.ComicsMapper;
-import com.einao.marvelcomics.domain.ICallback;
+import com.einao.marvelcomics.domain.UseCaseCallback;
 import com.einao.marvelcomics.domain.beans.Comics;
 import com.einao.marvelcomics.domain.beans.DataError;
 import com.einao.marvelcomics.domain.providers.Navigator;
@@ -53,7 +53,7 @@ public class MainPresenter extends Presenter<MainView> {
         }
     }
 
-    protected ICallback<Comics> callback = new ICallback<Comics>() {
+    protected UseCaseCallback<Comics> callback = new UseCaseCallback<Comics>() {
         @Override
         public void onSuccess(Comics response) {
             ComicsMapper comicsMapper = new ComicsMapper();
@@ -64,7 +64,7 @@ public class MainPresenter extends Presenter<MainView> {
         @Override
         public void onError(DataError error) {
             if (!existView()) return;
-            view.get().showToast(error.getMessage());
+            view.get().showMessage(error.getMessage());
         }
     };
 

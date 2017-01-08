@@ -3,8 +3,6 @@ package com.einao.marvelcomics.app.ui.comiclist.presenter;
 import com.einao.marvelcomics.app.ui.comiclist.view.MainView;
 import com.einao.marvelcomics.app.ui.common.ComicObjectMother;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
-import com.einao.marvelcomics.domain.ICallback;
-import com.einao.marvelcomics.domain.beans.Comics;
 import com.einao.marvelcomics.domain.beans.DataError;
 import com.einao.marvelcomics.domain.threads.ThreadManager;
 import com.einao.marvelcomics.domain.usecases.ComicsUseCase;
@@ -69,7 +67,7 @@ public class MainPresenterTest {
 
         mainPresenter.start();
 
-        Mockito.verify(mainView).showToast(Mockito.anyString());
+        Mockito.verify(mainView).showMessage(Mockito.anyString());
     }
 
 }

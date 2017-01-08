@@ -1,4 +1,4 @@
-package com.einao.marvelcomics.data.database;
+package com.einao.marvelcomics.data.database.realm;
 
 import android.content.Context;
 

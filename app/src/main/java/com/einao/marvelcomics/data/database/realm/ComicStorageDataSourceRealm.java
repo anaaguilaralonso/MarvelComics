@@ -1,16 +1,14 @@
-package com.einao.marvelcomics.data.database;
+package com.einao.marvelcomics.data.database.realm;
 
-import android.os.Looper;
 import android.util.Log;
 
+import com.einao.marvelcomics.data.database.ComicStorageDataSource;
 import com.einao.marvelcomics.data.database.realm.entities.ComicRealmObject;
 import com.einao.marvelcomics.data.database.realm.entities.mappers.StorageComicsEntityMapper;
 import com.einao.marvelcomics.data.entities.ComicsEntity;
-import com.einao.marvelcomics.domain.beans.Comic;
 import com.einao.marvelcomics.domain.beans.Comics;
 import com.einao.marvelcomics.domain.beans.DataResponse;
 
-import java.util.Iterator;
 import java.util.List;
 
 import io.realm.Realm;

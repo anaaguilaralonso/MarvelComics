@@ -50,4 +50,12 @@ public class DataResponseMapper {
         return dataError;
     }
 
+    public DataResponse<Comics> map(DataResponse<ComicsEntity> comicsEntity) {
+        ComicsEntityMapper comicsMapper = new ComicsEntityMapper();
+        Comics comics = comicsMapper.map(comicsEntity.getData());
+
+        DataResponse<Comics> comicsDataResponse = new DataResponse<>();
+        comicsDataResponse.setData(comics);
+        return comicsDataResponse;
+    }
 }

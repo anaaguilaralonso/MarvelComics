@@ -1,7 +1,7 @@
 package com.einao.marvelcomics.domain.usecases;
 
 import com.einao.marvelcomics.domain.ComicRepository;
-import com.einao.marvelcomics.domain.ICallback;
+import com.einao.marvelcomics.domain.UseCaseCallback;
 import com.einao.marvelcomics.domain.beans.Comics;
 import com.einao.marvelcomics.domain.beans.DataResponse;
 import com.einao.marvelcomics.domain.threads.ThreadManager;
@@ -9,7 +9,7 @@ import com.einao.marvelcomics.domain.threads.ThreadManager;
 public class ComicsUseCase extends UseCase<Comics, Void> {
 
     private ComicRepository comicRepository;
-    private ICallback<Comics> callback;
+    private UseCaseCallback<Comics> callback;
     private ThreadManager threadManager;
 
     public ComicsUseCase(ThreadManager threadManager, ComicRepository comicRepository) {
@@ -54,7 +54,7 @@ public class ComicsUseCase extends UseCase<Comics, Void> {
     }
 
     @Override
-    public void addCallback(ICallback<Comics> notification) {
+    public void addCallback(UseCaseCallback<Comics> notification) {
         this.callback = notification;
     }
 

@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.einao.marvelcomics.app.ui.comiclist.view.ComicView;
+import com.einao.marvelcomics.app.ui.widget.ComicView;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
 import com.einao.marvelcomics.domain.providers.ImageLoader;

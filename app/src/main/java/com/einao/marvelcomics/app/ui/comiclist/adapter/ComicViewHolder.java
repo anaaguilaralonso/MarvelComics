@@ -2,7 +2,7 @@ package com.einao.marvelcomics.app.ui.comiclist.adapter;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.einao.marvelcomics.app.ui.comiclist.view.ComicView;
+import com.einao.marvelcomics.app.ui.widget.ComicView;
 
 /**
 
