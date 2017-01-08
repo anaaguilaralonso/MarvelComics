@@ -6,11 +6,11 @@ import com.einao.marvelcomics.domain.beans.Comic;
 public class ComicEntityMapper {
 
     public Comic map(ComicEntity comicEntity) {
-        Comic comic = new Comic();
-        comic.setId(comicEntity.getId());
-        comic.setTitle(comicEntity.getTitle());
-        comic.setDescription(comicEntity.getDescription());
-        comic.setImageUrl(comicEntity.getImageUrl());
-        return comic;
+        Comic.ComicBuilder comicBuilder = new Comic.ComicBuilder();
+        comicBuilder.setId(comicEntity.getId());
+        comicBuilder.setTitle(comicEntity.getTitle());
+        comicBuilder.setDescription(comicEntity.getDescription());
+        comicBuilder.setImageUrl(comicEntity.getImageUrl());
+        return comicBuilder.build();
     }
 }
