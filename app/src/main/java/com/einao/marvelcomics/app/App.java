@@ -51,7 +51,7 @@ public class App extends Application {
     }
 
     private ThreadManager getThreadManager() {
-        return ThreadManagerImpl.getInstance();
+        return new ThreadManagerImpl();
     }
 
     @NonNull

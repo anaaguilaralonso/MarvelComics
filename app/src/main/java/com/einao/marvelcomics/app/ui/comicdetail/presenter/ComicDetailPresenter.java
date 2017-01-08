@@ -4,6 +4,7 @@ import com.einao.marvelcomics.app.ui.comicdetail.view.ComicDetailView;
 import com.einao.marvelcomics.app.ui.common.Presenter;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 
+
 public class ComicDetailPresenter extends Presenter<ComicDetailView> {
 
     ComicViewModel comic;

@@ -74,4 +74,13 @@ public class MainPresenterTest {
         Mockito.verify(mainView).showMessage(Mockito.anyString());
     }
 
+    @Test
+    public void onClickItem_goToDetails(){
+        ComicViewModel comicViewModel = new ComicViewModel();
+
+        mainPresenter.onComicClicked(comicViewModel);
+
+        Mockito.verify(navigator).goTo(comicViewModel);
+    }
+
 }
