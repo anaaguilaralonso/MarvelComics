@@ -1,6 +1,6 @@
 package com.einao.marvelcomics.app.ui.viewmodel.mappers;
 
-import com.einao.marvelcomics.app.ui.common.ComicGenerator;
+import com.einao.marvelcomics.app.ui.common.ComicObjectMother;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
 import com.einao.marvelcomics.domain.beans.Comics;
 
@@ -19,8 +19,8 @@ public class ComicsMapperTest {
     @Test
     public void onComicsMap_allItemsAdded() {
         int numberOfComics = 4;
-        ComicGenerator comicGenerator = new ComicGenerator();
-        Comics comics = comicGenerator.getSimpleComicList(numberOfComics);
+        ComicObjectMother comicObjectMother = new ComicObjectMother();
+        Comics comics = comicObjectMother.getSimpleComicList(numberOfComics);
 
         ComicsViewModel comicsViewModel = comicsMapper.map(comics);
 

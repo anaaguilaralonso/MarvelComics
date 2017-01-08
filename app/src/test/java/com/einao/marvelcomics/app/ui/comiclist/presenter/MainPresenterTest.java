@@ -1,8 +1,10 @@
 package com.einao.marvelcomics.app.ui.comiclist.presenter;
 
 import com.einao.marvelcomics.app.ui.comiclist.view.MainView;
-import com.einao.marvelcomics.app.ui.common.ComicGenerator;
+import com.einao.marvelcomics.app.ui.common.ComicObjectMother;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
+import com.einao.marvelcomics.domain.ICallback;
+import com.einao.marvelcomics.domain.beans.Comics;
 import com.einao.marvelcomics.domain.beans.DataError;
 import com.einao.marvelcomics.domain.threads.ThreadManager;
 import com.einao.marvelcomics.domain.usecases.ComicsUseCase;
@@ -16,9 +18,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
-/**
-
- */
 @RunWith(MockitoJUnitRunner.class)
 public class MainPresenterTest {
 
@@ -33,11 +32,11 @@ public class MainPresenterTest {
 
     private MainPresenter mainPresenter;
 
-    private ComicGenerator comicGenerator;
+    private ComicObjectMother comicObjectMother;
 
     @Before
     public void init() {
-        comicGenerator = new ComicGenerator();
+        comicObjectMother = new ComicObjectMother();
         mainPresenter = new MainPresenter(mainView, comicsUseCase);
     }
 
@@ -46,7 +45,7 @@ public class MainPresenterTest {
         Mockito.doAnswer(new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                mainPresenter.onSuccess(comicGenerator.getSimpleComicList(3));
+                mainPresenter.callback.onSuccess(comicObjectMother.getSimpleComicList(3));
                 return null;
             }
         }).when(comicsUseCase).execute();
@@ -63,7 +62,7 @@ public class MainPresenterTest {
             public Object answer(InvocationOnMock invocation) throws Throwable {
                 DataError error = new DataError();
                 error.setMessage("Error");
-                mainPresenter.onError(error);
+                mainPresenter.callback.onError(error);
                 return null;
             }
         }).when(comicsUseCase).execute();

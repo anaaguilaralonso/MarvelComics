@@ -1,7 +1,7 @@
 package com.einao.marvelcomics.data.network.entities.mappers;
 
 import com.einao.marvelcomics.data.entities.ComicsEntity;
-import com.einao.marvelcomics.data.network.common.NetworkComicResultGenerator;
+import com.einao.marvelcomics.data.network.common.NetworkComicResultObjectMother;
 import com.einao.marvelcomics.data.network.entities.NetworkResponse;
 import com.einao.marvelcomics.data.network.entities.marvelentities.Result;
 
@@ -23,7 +23,7 @@ public class NetworkComicsEntityMapperTest {
     @Test
     public void onSuccess_addAllComics() {
         int numberOfComics = 4;
-        NetworkComicResultGenerator comicGenerator = new NetworkComicResultGenerator();
+        NetworkComicResultObjectMother comicGenerator = new NetworkComicResultObjectMother();
         NetworkResponse<List<Result>> networkResponse = comicGenerator.getNetworkComicsResponse(numberOfComics);
 
         ComicsEntity comics = comicsMapper.map(networkResponse.getResponse());

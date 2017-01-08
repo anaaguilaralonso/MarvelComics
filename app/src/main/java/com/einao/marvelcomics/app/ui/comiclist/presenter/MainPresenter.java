@@ -56,7 +56,7 @@ public class MainPresenter implements Presenter {
         return mainView.get() != null;
     }
 
-    private ICallback<Comics> callback = new ICallback<Comics>() {
+    protected ICallback<Comics> callback = new ICallback<Comics>() {
         @Override
         public void onSuccess(Comics response) {
             ComicsMapper comicsMapper = new ComicsMapper();

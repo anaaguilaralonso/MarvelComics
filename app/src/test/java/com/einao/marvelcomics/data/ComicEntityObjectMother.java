@@ -3,11 +3,15 @@ package com.einao.marvelcomics.data;
 import com.einao.marvelcomics.data.entities.ComicEntity;
 import com.einao.marvelcomics.data.entities.ComicsEntity;
 
-public class ComicEntityGenerator {
+import java.util.Random;
+import java.util.UUID;
+
+public class ComicEntityObjectMother {
 
 
     public ComicEntity getSimpleComic() {
         ComicEntity comicEntity = new ComicEntity();
+        comicEntity.setId(new Random().nextInt());
         comicEntity.setTitle("Comic Title " + Math.random());
         comicEntity.setDescription("Description of the comic: "+comicEntity.getTitle());
         comicEntity.setImageUrl("http://hola.com");
