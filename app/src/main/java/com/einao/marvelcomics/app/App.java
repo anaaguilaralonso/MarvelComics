@@ -7,6 +7,8 @@ import com.einao.marvelcomics.app.policy.ShortDatabasePolicy;
 import com.einao.marvelcomics.app.provider.RepositoryProvider;
 import com.einao.marvelcomics.app.provider.UseCaseProvider;
 import com.einao.marvelcomics.app.threads.ThreadManagerImpl;
+import com.einao.marvelcomics.domain.providers.ImageLoader;
+import com.einao.marvelcomics.app.ui.provider.image.PicassoImageLoader;
 import com.einao.marvelcomics.data.database.StorageDataSourceCreator;
 import com.einao.marvelcomics.data.database.realm.RealmCreator;
 import com.einao.marvelcomics.data.network.NetworkDataSourceCreator;
@@ -14,24 +16,34 @@ import com.einao.marvelcomics.data.network.retrofit.RetrofitCreator;
 import com.einao.marvelcomics.domain.policy.DatabasePolicy;
 import com.einao.marvelcomics.domain.threads.ThreadManager;
 
-import io.realm.Realm;
-
 public class App extends Application {
 
     public UseCaseProvider useCaseProvider;
+    public ImageLoader imageLoader;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
+        useCaseProvider = getUseCaseProvider();
+        imageLoader = getImageLoader();
+    }
+
+    private UseCaseProvider getUseCaseProvider() {
+        RepositoryProvider repositoryProvider = getRepositoryProvider();
+        ThreadManager threadManager = getThreadManager();
+
+        return getUseCaseProvider(threadManager, repositoryProvider);
+    }
+
+    @NonNull
+    private RepositoryProvider getRepositoryProvider() {
         NetworkDataSourceCreator networkDataSourceCreator = getNetworkDataSourceCreator();
         StorageDataSourceCreator storageDataSourceCreator = getStorageDataSourceCreator();
         DatabasePolicy databasePolicy = getDatabasePolicy();
 
-        RepositoryProvider repositoryProvider = getRepositoryProvider(networkDataSourceCreator,
+        return getRepositoryProvider(networkDataSourceCreator,
                 storageDataSourceCreator, databasePolicy);
-        ThreadManager threadManager = getThreadManager();
-        useCaseProvider = getUseCaseProvider(threadManager, repositoryProvider);
     }
 
     private UseCaseProvider getUseCaseProvider(ThreadManager threadManager, RepositoryProvider repositoryProvider) {
@@ -60,7 +72,10 @@ public class App extends Application {
     }
 
     public StorageDataSourceCreator getStorageDataSourceCreator() {
-        Realm.init(this);
-        return new RealmCreator();
+        return new RealmCreator(this);
+    }
+
+    public ImageLoader getImageLoader() {
+        return new PicassoImageLoader(this);
     }
 }

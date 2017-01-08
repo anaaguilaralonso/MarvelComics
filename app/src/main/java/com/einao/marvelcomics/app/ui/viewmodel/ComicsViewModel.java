@@ -40,4 +40,7 @@ public class ComicsViewModel {
         return comics.iterator();
     }
 
+    public void deleteAll() {
+        comics.clear();
+    }
 }

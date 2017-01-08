@@ -2,6 +2,7 @@ package com.einao.marvelcomics.data.network.common;
 
 import com.einao.marvelcomics.data.network.entities.NetworkResponse;
 import com.einao.marvelcomics.data.network.entities.marvelentities.Result;
+import com.einao.marvelcomics.data.network.entities.marvelentities.Thumbnail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,10 @@ public class NetworkComicResultGenerator {
     public Result getSimpleComic() {
         Result comic = new Result();
         comic.setTitle("Comic Title " + Math.random());
+        comic.setDescription("Description of the comic: "+comic.getTitle());
+        Thumbnail thumbnail = new Thumbnail();
+        thumbnail.setPath("http://url.com");
+        comic.setThumbnail(thumbnail);
         return comic;
     }
 

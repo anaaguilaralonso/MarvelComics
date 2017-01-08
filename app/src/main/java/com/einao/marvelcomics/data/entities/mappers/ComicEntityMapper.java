@@ -7,7 +7,10 @@ public class ComicEntityMapper {
 
     public Comic map(ComicEntity comicEntity) {
         Comic comic = new Comic();
+        comic.setId(comicEntity.getId());
         comic.setTitle(comicEntity.getTitle());
+        comic.setDescription(comicEntity.getDescription());
+        comic.setImageUrl(comicEntity.getImageUrl());
         return comic;
     }
 }

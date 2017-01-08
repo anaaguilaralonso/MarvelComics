@@ -2,7 +2,7 @@ package com.einao.marvelcomics.domain;
 
 import com.einao.marvelcomics.domain.beans.DataError;
 
-public interface INotificator<T> {
+public interface ICallback<T> {
 
     void onSuccess(T response);
 

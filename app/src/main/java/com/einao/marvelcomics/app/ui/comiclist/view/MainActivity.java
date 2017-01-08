@@ -11,6 +11,7 @@ import com.einao.marvelcomics.app.ui.common.BaseActivity;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainView {
@@ -27,7 +28,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         comicRecyclerView.setLayoutManager(layoutManager);
 
-        comicListAdapter = new ComicListAdapter();
+        comicListAdapter = new ComicListAdapter(this, imageLoader);
         comicRecyclerView.setAdapter(comicListAdapter);
 
         presenter.start();
@@ -35,12 +36,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
 
     @Override
     public MainPresenter initPresenter() {
-        return new MainPresenter(this, comicsUseCase);
+        return new MainPresenter(this, useCaseProvider.getComicsUseCase());
     }
 
-    @Override
-    public void injectDependencies() {
-
+    @OnClick(R.id.button)
+    public void onClickButton() {
+        presenter.start();
     }
 
     @Override
@@ -51,5 +52,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     @Override
     public void addComic(ComicViewModel comic) {
         comicListAdapter.add(comic);
+    }
+
+    @Override
+    public void removeAllComics() {
+        comicListAdapter.removeAll();
     }
 }

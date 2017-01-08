@@ -6,19 +6,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.einao.marvelcomics.app.App;
-import com.einao.marvelcomics.domain.usecases.ComicsUseCase;
+import com.einao.marvelcomics.app.provider.UseCaseProvider;
+import com.einao.marvelcomics.domain.providers.ImageLoader;
 
 import butterknife.ButterKnife;
-
-/**
-
- */
 
 public abstract class BaseActivity<T extends Presenter> extends AppCompatActivity implements BaseView {
 
     protected T presenter;
 
-    protected ComicsUseCase comicsUseCase;
+    protected UseCaseProvider useCaseProvider;
+    protected ImageLoader imageLoader;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,22 +26,27 @@ public abstract class BaseActivity<T extends Presenter> extends AppCompatActivit
 
         ButterKnife.bind(this);
 
-        comicsUseCase = ((App) this.getApplication()).useCaseProvider.getComicsUseCase();
-
-        injectDependencies();
+        useCaseProvider = ((App) this.getApplication()).useCaseProvider;
+        imageLoader = ((App) this.getApplication()).getImageLoader();
 
         if (presenter == null) {
             presenter = initPresenter();
         }
 
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (presenter != null){
+            presenter.stop();
+        }
     }
 
     public abstract int getLayout();
 
     public abstract T initPresenter();
-
-    public abstract void injectDependencies();
 
     @Override
     public void showToast(String error) {

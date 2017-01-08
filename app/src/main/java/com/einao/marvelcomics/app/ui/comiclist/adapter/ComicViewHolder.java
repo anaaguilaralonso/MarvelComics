@@ -1,13 +1,8 @@
 package com.einao.marvelcomics.app.ui.comiclist.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.TextView;
 
-import com.einao.marvelcomics.R;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import com.einao.marvelcomics.app.ui.comiclist.view.ComicView;
 
 /**
 
@@ -15,13 +10,11 @@ import butterknife.ButterKnife;
 
 public class ComicViewHolder extends RecyclerView.ViewHolder{
 
-    @BindView(R.id.title)
-    public TextView title;
+    ComicView customView;
 
-    public ComicViewHolder(View itemView) {
-        super(itemView);
-
-        ButterKnife.bind(this, itemView);
+    public ComicViewHolder(ComicView customView) {
+        super(customView);
+        this.customView = customView;
 
     }
 }

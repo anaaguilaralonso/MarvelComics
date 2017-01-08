@@ -9,6 +9,8 @@ public class ComicEntityGenerator {
     public ComicEntity getSimpleComic() {
         ComicEntity comicEntity = new ComicEntity();
         comicEntity.setTitle("Comic Title " + Math.random());
+        comicEntity.setDescription("Description of the comic: "+comicEntity.getTitle());
+        comicEntity.setImageUrl("http://hola.com");
         return comicEntity;
     }
 

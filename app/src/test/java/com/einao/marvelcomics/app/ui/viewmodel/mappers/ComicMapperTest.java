@@ -10,9 +10,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-/**
-
- */
 @RunWith(MockitoJUnitRunner.class)
 public class ComicMapperTest {
 
@@ -26,8 +23,27 @@ public class ComicMapperTest {
 
         ComicViewModel comicViewModel = comicMapper.map(comic);
 
-        Assert.assertTrue(comic.getTitle().compareTo(comicViewModel.getTitle()) == 0);
+        Assert.assertTrue(comic.getTitle().compareTo(comicViewModel.title) == 0);
     }
 
+    @Test
+    public void onComicsMap_checkDescription() {
+        ComicGenerator comicGenerator = new ComicGenerator();
+        Comic comic = comicGenerator.getSimpleComic();
+
+        ComicViewModel comicViewModel = comicMapper.map(comic);
+
+        Assert.assertTrue(comic.getDescription().compareTo(comicViewModel.description) == 0);
+    }
+
+    @Test
+    public void onComicsMap_checkImageUrl() {
+        ComicGenerator comicGenerator = new ComicGenerator();
+        Comic comic = comicGenerator.getSimpleComic();
+
+        ComicViewModel comicViewModel = comicMapper.map(comic);
+
+        Assert.assertTrue(comic.getImageUrl().compareTo(comicViewModel.imageUrl) == 0);
+    }
 
 }
