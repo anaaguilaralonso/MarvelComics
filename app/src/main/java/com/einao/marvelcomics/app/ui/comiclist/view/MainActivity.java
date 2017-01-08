@@ -3,7 +3,6 @@ package com.einao.marvelcomics.app.ui.comiclist.view;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Button;
 
 import com.einao.marvelcomics.R;
 import com.einao.marvelcomics.app.ui.comiclist.adapter.ComicListAdapter;
@@ -37,16 +36,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
 
     @Override
     public MainPresenter initPresenter() {
-        return new MainPresenter(this, comicsUseCase);
-    }
-
-    @Override
-    public void injectDependencies() {
-
+        return new MainPresenter(this, useCaseProvider.getComicsUseCase());
     }
 
     @OnClick(R.id.button)
-    public void onClickButton(){
+    public void onClickButton() {
         presenter.start();
     }
 

@@ -1,8 +1,7 @@
 package com.einao.marvelcomics.domain.usecases;
 
-import com.einao.marvelcomics.data.ComicDataRepository;
 import com.einao.marvelcomics.domain.ComicRepository;
-import com.einao.marvelcomics.domain.INotificator;
+import com.einao.marvelcomics.domain.ICallback;
 import com.einao.marvelcomics.domain.beans.Comics;
 import com.einao.marvelcomics.domain.beans.DataResponse;
 import com.einao.marvelcomics.domain.threads.ThreadManager;
@@ -10,7 +9,7 @@ import com.einao.marvelcomics.domain.threads.ThreadManager;
 public class ComicsUseCase extends UseCase<Comics, Void> {
 
     private ComicRepository comicRepository;
-    private INotificator<Comics> notificator;
+    private ICallback<Comics> callback;
     private ThreadManager threadManager;
 
     public ComicsUseCase(ThreadManager threadManager, ComicRepository comicRepository) {
@@ -25,24 +24,46 @@ public class ComicsUseCase extends UseCase<Comics, Void> {
             public void run() {
 
                 final DataResponse<Comics> dataResponse = comicRepository.getComics();
-                threadManager.post(new Runnable() {
+                Runnable runnable = new Runnable() {
                     @Override
                     public void run() {
-                        if (dataResponse.isSuccessful()){
-                            Comics comics = dataResponse.getData();
-                            notificator.onSuccess(comics);
+                        if (dataResponse.isSuccessful()) {
+                            handleSuccessful(dataResponse);
                         } else {
-                            notificator.onError(dataResponse.getError());
+                            handleError(dataResponse);
                         }
                     }
-                });
+                };
+                threadManager.post(runnable);
             }
         });
         thread.start();
     }
 
+    private void handleError(DataResponse<Comics> dataResponse) {
+        if (isCallbackAlive()) {
+            callback.onError(dataResponse.getError());
+        }
+    }
+
+    private void handleSuccessful(DataResponse<Comics> dataResponse) {
+        Comics comics = dataResponse.getData();
+        if (isCallbackAlive()) {
+            callback.onSuccess(comics);
+        }
+    }
+
     @Override
-    public void registerNotificator(INotificator<Comics> notification) {
-        this.notificator = notification;
+    public void addCallback(ICallback<Comics> notification) {
+        this.callback = notification;
+    }
+
+    @Override
+    public void stopCallback() {
+        this.callback = null;
+    }
+
+    private boolean isCallbackAlive() {
+        return callback != null;
     }
 }

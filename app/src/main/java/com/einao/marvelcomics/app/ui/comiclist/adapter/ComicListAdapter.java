@@ -2,10 +2,13 @@ package com.einao.marvelcomics.app.ui.comiclist.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
-import com.einao.marvelcomics.app.ui.comiclist.view.ComicCustomView;
-import com.einao.marvelcomics.app.ui.provider.image.ImageLoader;
+import com.einao.marvelcomics.R;
+import com.einao.marvelcomics.app.ui.comiclist.view.ComicView;
+import com.einao.marvelcomics.domain.providers.ImageLoader;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
 
@@ -23,9 +26,9 @@ public class ComicListAdapter extends RecyclerView.Adapter<ComicViewHolder> {
 
     @Override
     public ComicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ComicCustomView comicCustomView = new ComicCustomView(this.context, imageLoader);
-
-        return new ComicViewHolder(comicCustomView);
+        ComicView comicView = new ComicView(context);
+        comicView.setImageLoader(imageLoader);
+        return new ComicViewHolder(comicView);
     }
 
     @Override

@@ -7,7 +7,7 @@ import com.einao.marvelcomics.app.policy.ShortDatabasePolicy;
 import com.einao.marvelcomics.app.provider.RepositoryProvider;
 import com.einao.marvelcomics.app.provider.UseCaseProvider;
 import com.einao.marvelcomics.app.threads.ThreadManagerImpl;
-import com.einao.marvelcomics.app.ui.provider.image.ImageLoader;
+import com.einao.marvelcomics.domain.providers.ImageLoader;
 import com.einao.marvelcomics.app.ui.provider.image.PicassoImageLoader;
 import com.einao.marvelcomics.data.database.StorageDataSourceCreator;
 import com.einao.marvelcomics.data.database.realm.RealmCreator;

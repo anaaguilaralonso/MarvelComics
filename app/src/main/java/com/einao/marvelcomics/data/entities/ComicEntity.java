@@ -2,11 +2,20 @@ package com.einao.marvelcomics.data.entities;
 
 public class ComicEntity {
 
+    Integer id;
     String title;
     String description;
     String imageUrl;
 
     public ComicEntity() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import com.einao.marvelcomics.R;
+import com.einao.marvelcomics.domain.providers.ImageLoader;
 import com.squareup.picasso.Picasso;
 
 public class PicassoImageLoader implements ImageLoader<ImageView> {

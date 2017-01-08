@@ -1,13 +1,16 @@
 package com.einao.marvelcomics.data.database;
 
+import android.os.Looper;
 import android.util.Log;
 
 import com.einao.marvelcomics.data.database.realm.entities.ComicRealmObject;
 import com.einao.marvelcomics.data.database.realm.entities.mappers.StorageComicsEntityMapper;
 import com.einao.marvelcomics.data.entities.ComicsEntity;
+import com.einao.marvelcomics.domain.beans.Comic;
 import com.einao.marvelcomics.domain.beans.Comics;
 import com.einao.marvelcomics.domain.beans.DataResponse;
 
+import java.util.Iterator;
 import java.util.List;
 
 import io.realm.Realm;
@@ -51,12 +54,13 @@ public class ComicStorageDataSourceRealm implements ComicStorageDataSource {
 
         StorageComicsEntityMapper comicMapper = new StorageComicsEntityMapper();
 
-        realm.beginTransaction();
         List<ComicRealmObject> comicsRealmObjects = comicMapper.map(comics);
-        List<ComicRealmObject> result = realm.copyToRealmOrUpdate(comicsRealmObjects);
+
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(comicsRealmObjects);
         realm.commitTransaction();
 
-        Log.i(this.getClass().getName(), "Saving comics: "+result.size());
+        Log.i(this.getClass().getName(), "Saving comics: "+ comicsRealmObjects.size());
 
         realmClient.closeRealm(realm);
 

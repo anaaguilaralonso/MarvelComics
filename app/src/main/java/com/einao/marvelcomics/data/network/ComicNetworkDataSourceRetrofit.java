@@ -3,6 +3,7 @@ package com.einao.marvelcomics.data.network;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.einao.marvelcomics.data.entities.ComicEntity;
 import com.einao.marvelcomics.data.entities.ComicsEntity;
 import com.einao.marvelcomics.data.network.common.ApiConstants;
 import com.einao.marvelcomics.data.network.entities.NetworkError;
@@ -36,7 +37,9 @@ public final class ComicNetworkDataSourceRetrofit implements ComicNetworkDataSou
     @Override
     public NetworkResponse<ComicsEntity> getComics() {
 
-        Call<ResponseBody> responseBodyCall = retrofitComicService.listComics(ApiConstants.HTTP_REQUEST_TIMESTAMP, ApiConstants.HTTP_REQUEST_HASH, ApiConstants.HTTP_REQUEST_APIKEY, 5);
+        Call<ResponseBody> responseBodyCall = retrofitComicService
+                .listComics(ApiConstants.HTTP_REQUEST_TIMESTAMP, ApiConstants.HTTP_REQUEST_HASH,
+                        ApiConstants.HTTP_REQUEST_APIKEY, 5);
         try {
             return getListNetworkResponse(responseBodyCall);
         } catch (IOException exception) {
@@ -44,12 +47,14 @@ public final class ComicNetworkDataSourceRetrofit implements ComicNetworkDataSou
         }
     }
 
-    private NetworkResponse<ComicsEntity> getListNetworkResponse(Call<ResponseBody> responseBodyCall) throws IOException {
+    private NetworkResponse<ComicsEntity> getListNetworkResponse(Call<ResponseBody> responseBodyCall) throws
+            IOException {
         Response<ResponseBody> response = responseBodyCall.execute();
         if (response.isSuccessful()) {
             NetworkResponse<ComicsEntity> networkResponse = new NetworkResponse<>();
             networkResponse.setResponse(getComicsFromResponse(response));
-            lastComicsRequest = System.nanoTime() / (1000*1000);
+
+            lastComicsRequest = System.nanoTime() / (1000 * 1000);
             return networkResponse;
         } else {
             return getErrorResponse(response.code(), response.message());

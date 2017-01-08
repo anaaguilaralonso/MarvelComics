@@ -18,7 +18,7 @@ public class StorageComicEntityMapper {
 
     public ComicRealmObject map(Comic comic) {
         ComicRealmObject comicRealmObject = new ComicRealmObject();
-        comicRealmObject.setId(UUID.randomUUID().toString());
+        comicRealmObject.setId(comic.getId());
         comicRealmObject.setTitle(comic.getTitle());
         comicRealmObject.setDescription(comic.getDescription());
         comicRealmObject.setImageUrl(comic.getImageUrl());

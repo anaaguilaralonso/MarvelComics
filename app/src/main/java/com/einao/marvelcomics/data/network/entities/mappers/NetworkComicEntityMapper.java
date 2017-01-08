@@ -7,6 +7,7 @@ public class NetworkComicEntityMapper {
 
     public ComicEntity map(Result result) {
         ComicEntity comic = new ComicEntity();
+        comic.setId(result.getId());
         comic.setTitle(result.getTitle());
         comic.setDescription(result.getDescription());
         comic.setImageUrl(result.getThumbnail().getPath() + "." + result.getThumbnail().getExtension());
