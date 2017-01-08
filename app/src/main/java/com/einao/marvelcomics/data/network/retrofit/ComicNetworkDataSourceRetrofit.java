@@ -1,10 +1,11 @@
-package com.einao.marvelcomics.data.network;
+package com.einao.marvelcomics.data.network.retrofit;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.einao.marvelcomics.data.entities.ComicEntity;
 import com.einao.marvelcomics.data.entities.ComicsEntity;
+import com.einao.marvelcomics.data.network.ComicNetworkDataSource;
 import com.einao.marvelcomics.data.network.common.ApiConstants;
 import com.einao.marvelcomics.data.network.entities.NetworkError;
 import com.einao.marvelcomics.data.network.entities.NetworkResponse;

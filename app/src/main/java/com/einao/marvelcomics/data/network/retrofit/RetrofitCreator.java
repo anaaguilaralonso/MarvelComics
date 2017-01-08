@@ -1,7 +1,6 @@
 package com.einao.marvelcomics.data.network.retrofit;
 
 import com.einao.marvelcomics.data.network.ComicNetworkDataSource;
-import com.einao.marvelcomics.data.network.ComicNetworkDataSourceRetrofit;
 import com.einao.marvelcomics.data.network.NetworkDataSourceCreator;
 
 

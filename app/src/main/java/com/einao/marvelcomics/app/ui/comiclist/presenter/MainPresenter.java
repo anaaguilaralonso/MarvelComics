@@ -6,23 +6,25 @@ import com.einao.marvelcomics.app.ui.common.Presenter;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicsViewModel;
 import com.einao.marvelcomics.app.ui.viewmodel.mappers.ComicsMapper;
-import com.einao.marvelcomics.domain.ICallback;
+import com.einao.marvelcomics.domain.UseCaseCallback;
 import com.einao.marvelcomics.domain.beans.Comics;
 import com.einao.marvelcomics.domain.beans.DataError;
+import com.einao.marvelcomics.domain.providers.Navigator;
 import com.einao.marvelcomics.domain.usecases.ComicsUseCase;
 
-import java.lang.ref.WeakReference;
 import java.util.Iterator;
 
-public class MainPresenter implements Presenter {
-
-    private WeakReference<MainView> mainView;
+public class MainPresenter extends Presenter<MainView> {
 
     private ComicsUseCase comicsUseCase;
 
-    public MainPresenter(MainView mainView, ComicsUseCase comicsUseCase) {
-        this.mainView = new WeakReference<>(mainView);
+    private Navigator<ComicViewModel> comicViewModelNavigator;
+
+    public MainPresenter(MainView mainView, Navigator<ComicViewModel> comicViewModelNavigator, ComicsUseCase
+            comicsUseCase) {
+        super(mainView);
         this.comicsUseCase = comicsUseCase;
+        this.comicViewModelNavigator = comicViewModelNavigator;
     }
 
     @Override
@@ -41,22 +43,17 @@ public class MainPresenter implements Presenter {
     }
 
     private void showComicList(ComicsViewModel comicList) {
-        if (existView()) {
-            mainView.get().removeAllComics();
-        }
+        if (!existView()) return;
+        view.get().removeAllComics();
+
         Iterator<ComicViewModel> iterator = comicList.iterator();
         while (iterator.hasNext()) {
-            if (existView()) {
-                mainView.get().addComic(iterator.next());
-            }
+            if (!existView()) return;
+            view.get().addComic(iterator.next());
         }
     }
 
-    private boolean existView() {
-        return mainView.get() != null;
-    }
-
-    protected ICallback<Comics> callback = new ICallback<Comics>() {
+    protected UseCaseCallback<Comics> callback = new UseCaseCallback<Comics>() {
         @Override
         public void onSuccess(Comics response) {
             ComicsMapper comicsMapper = new ComicsMapper();
@@ -66,9 +63,12 @@ public class MainPresenter implements Presenter {
 
         @Override
         public void onError(DataError error) {
-            if (existView()) {
-                mainView.get().showToast(error.getMessage());
-            }
+            if (!existView()) return;
+            view.get().showMessage(error.getMessage());
         }
     };
+
+    public void onComicClicked(ComicViewModel comicViewModel) {
+        comicViewModelNavigator.goTo(comicViewModel);
+    }
 }

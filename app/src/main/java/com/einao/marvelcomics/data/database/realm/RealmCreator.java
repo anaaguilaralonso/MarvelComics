@@ -3,8 +3,6 @@ package com.einao.marvelcomics.data.database.realm;
 import android.content.Context;
 
 import com.einao.marvelcomics.data.database.ComicStorageDataSource;
-import com.einao.marvelcomics.data.database.ComicStorageDataSourceRealm;
-import com.einao.marvelcomics.data.database.RealmClient;
 import com.einao.marvelcomics.data.database.StorageDataSourceCreator;
 
 public class RealmCreator implements StorageDataSourceCreator {

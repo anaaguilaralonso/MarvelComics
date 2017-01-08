@@ -1,4 +1,4 @@
-package com.einao.marvelcomics.app.ui.comiclist.view;
+package com.einao.marvelcomics.app.ui.widget;
 
 import android.content.Context;
 import android.os.Build;
