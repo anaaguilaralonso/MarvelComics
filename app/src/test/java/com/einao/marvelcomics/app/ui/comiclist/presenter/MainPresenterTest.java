@@ -4,6 +4,7 @@ import com.einao.marvelcomics.app.ui.comiclist.view.MainView;
 import com.einao.marvelcomics.app.ui.common.ComicObjectMother;
 import com.einao.marvelcomics.app.ui.viewmodel.ComicViewModel;
 import com.einao.marvelcomics.domain.beans.DataError;
+import com.einao.marvelcomics.domain.providers.Navigator;
 import com.einao.marvelcomics.domain.threads.ThreadManager;
 import com.einao.marvelcomics.domain.usecases.ComicsUseCase;
 
@@ -28,6 +29,9 @@ public class MainPresenterTest {
     @Mock
     private ComicsUseCase comicsUseCase;
 
+    @Mock
+    private Navigator<ComicViewModel> navigator;
+
     private MainPresenter mainPresenter;
 
     private ComicObjectMother comicObjectMother;
@@ -35,7 +39,7 @@ public class MainPresenterTest {
     @Before
     public void init() {
         comicObjectMother = new ComicObjectMother();
-        mainPresenter = new MainPresenter(mainView, comicsUseCase);
+        mainPresenter = new MainPresenter(mainView, navigator, comicsUseCase);
     }
 
     @Test
